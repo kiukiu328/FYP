@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:background="@drawable/tool_bar_color2"
+            android:background="@drawable/tool_bar_color_y2"
             android:orientation="horizontal"
             >
 
