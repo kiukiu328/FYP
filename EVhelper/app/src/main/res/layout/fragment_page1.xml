@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".stream.page1">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/first_page"
+        >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:id="@+id/open_another"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:padding="5dp"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/setup"
+            android:scaleType="fitStart"
+            android:background="@android:color/transparent"
+
+            />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/timing_picture"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@color/black" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Live Stream"
+            android:id="@+id/btn_live"
+            android:textAllCaps="false"
+            />
+    </LinearLayout>
+
+</FrameLayout>

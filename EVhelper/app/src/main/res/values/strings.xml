@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">EV helper</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_notification_channel_id">fcm_default_channel</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="actionBar"></string>
+    <string-array name="CentreArea">
+        <item><font color="white"><b>HongKongIsland</b></font></item>
+        <item><font color="white"><b>Kowloon</b></font></item>
+        <item><font color="white"><b>NewTerritories</b></font></item>
+    </string-array>
+    <string-array name="HongKongIslandDistrict">
+        <item><font color="white"><b>Ap Lei Chau</b></font></item>
+        <item><font color="white"><b>Chai Wan</b></font></item>
+        <item><font color="white"><b>North Point</b></font></item>
+        <item><font color="white"><b>Quarry Bay</b></font></item>
+    </string-array>
+    <string-array name="KowloonDistrict">
+        <item><font color="white"><b>Cheung Sha Wan</b></font></item>
+        <item><font color="white"><b>Hung Hom</b></font></item>
+        <item><font color="white"><b>Kowloon Bay</b></font></item>
+        <item><font color="white"><b>Kwun Tong</b></font></item>
+        <item><font color="white"><b>To Kwa Wan</b></font></item>
+    </string-array>
+    <string-array name="NewTerritoriesDistrict">
+        <item><font color="white"><b>Fanling</b></font></item>
+        <item><font color="white"><b>Kwai Chung</b></font></item>
+        <item><font color="white"><b>Shatin</b></font></item>
+        <item><font color="white"><b>Sheung Shui</b></font></item>
+        <item><font color="white"><b>Tuen Mun</b></font></item>
+        <item><font color="white"><b>Tsuen Wan</b></font></item>
+        <item><font color="white"><b>Yuen Long</b></font></item>
+    </string-array>
+    <string-array name="ElectricVehicleService">
+        <item><font color="white"><b>Air Filter</b></font></item>
+        <item><font color="white"><b>Battery</b></font></item>
+        <item><font color="white"><b>Brake System</b></font></item>
+        <item><font color="white"><b>Car Beauty</b></font></item>
+        <item><font color="white"><b>Coolant</b></font></item>
+        <item><font color="white"><b>Four-Wheel Alignment(include tire)</b></font></item>
+        <item><font color="white"><b>Restraint System(airbags)</b></font></item>
+        <item><font color="white"><b>Annual Checking</b></font></item>
+        <item><font color="white"><b>Others</b></font></item>
+    </string-array>
+    <string-array name="ElectricVehicleYear">
+        <item><font color="white"><b>Six months</b></font></item>
+        <item><font color="white"><b>One year</b></font></item>
+        <item><font color="white"><b>Two-year</b></font></item>
+        <item><font color="white"><b>Four-year</b></font></item>
+    </string-array>
+</resources>

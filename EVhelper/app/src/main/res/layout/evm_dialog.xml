@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="330dp"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/evm_dia_bg">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:orientation="vertical"
+                android:layout_marginTop="50dp">
+        <android.widget.Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/noColor"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="Google Calender"
+            android:textSize="20dp"
+            android:id="@+id/evm_dia_cal"
+            android:layout_weight="1"
+            android:layout_centerHorizontal="true"
+></android.widget.Button>
+        <android.widget.Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/noColor"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="Auto Renew"
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp"
+            android:id="@+id/evm_dia_auto"
+
+            android:layout_weight="1"
+            ></android.widget.Button>
+        <android.widget.Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/noColor"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="Modify"
+            android:textSize="20dp"
+            android:layout_weight="1"
+            android:id="@+id/evm_dia_mod"
+            android:layout_centerHorizontal="true"
+            ></android.widget.Button>
+
+            <android.widget.Button
+                android:id="@+id/evm_dia_del"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+
+                android:layout_weight="1"
+                android:background="@color/noColor"
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"></android.widget.Button>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/wheels_removebg" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
