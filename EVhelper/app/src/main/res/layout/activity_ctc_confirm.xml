@@ -25,15 +25,16 @@
                 app:iconGravity="textStart"
                 android:id="@+id/mainPageBtn"
                 android:backgroundTint="@color/noColor"
-                android:layout_marginLeft="10dp"></Button>
+                android:layout_marginLeft="10dp"
+                android:visibility="gone"></Button>
             <Button
                 android:layout_width="52dp"
                 android:layout_height="52dp"
-               android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
+                android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
                 app:iconGravity="textStart"
                 android:id="@+id/btn_back"
                 android:backgroundTint="@color/noColor"
-
+                android:layout_marginLeft="10dp"
                 ></Button>
             <TextView
                 android:layout_width="match_parent"

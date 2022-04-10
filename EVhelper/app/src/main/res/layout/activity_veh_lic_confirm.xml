@@ -27,7 +27,7 @@
                 android:layout_marginLeft="10dp"
                 android:drawableLeft="@drawable/ic_baseline_home_24"
                 app:iconGravity="textStart"
-
+                android:visibility="gone"
                 android:id="@+id/mainPageBtn"></Button>
             <Button
                 android:layout_width="52dp"
