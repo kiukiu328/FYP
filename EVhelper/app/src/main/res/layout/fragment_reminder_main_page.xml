@@ -27,7 +27,8 @@
             app:iconGravity="textStart"
             app:iconPadding="0dp"
             android:backgroundTint="@color/noColor"
-            android:layout_marginLeft="10dp"></Button>
+            android:layout_marginLeft="10dp"
+            android:visibility="gone"></Button>
 
             <TextView
                 android:layout_width="match_parent"
