@@ -38,7 +38,7 @@
                 android:text="Reminder"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:layout_marginRight="52dp"
+                
                 android:textStyle="bold"/>
         </LinearLayout>
 
