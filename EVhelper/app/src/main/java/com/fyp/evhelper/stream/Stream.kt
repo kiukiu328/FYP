@@ -1,5 +1,7 @@
 package com.fyp.evhelper.stream
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.fyp.evhelper.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.database.*
 
 
 class Stream : Fragment() {
@@ -18,11 +21,41 @@ class Stream : Fragment() {
     private var tabLayout: TabLayout? = null
     private val tab_label = arrayOf("Live", "Records")
     private val drables = intArrayOf(R.drawable.live, R.drawable.record)
+    var ip_address = ""
+
+    //configuration the address
+    fun init_ip_address()
+    {
+        if (ip_address == "") {
+            val database = FirebaseDatabase.getInstance()
+            val ref = database.reference.child("ip_address")
+            ref.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    ip_address = dataSnapshot.value.toString()
+                    saveAddress(ip_address)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    println("The read failed: " + databaseError.code)
+                }
+            })
+        }
+    }
+
+    fun saveAddress(address: String?) {
+        val preferences: SharedPreferences =
+        requireContext().getSharedPreferences("parameter", Context.MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putString("ip_address", address)
+        editor.commit()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //初始化地址
+        init_ip_address()
         val v: View = inflater.inflate(R.layout.fragment_stream, container, false)
         viewPager2 = v.findViewById(R.id.viewPager2)
         tabLayout = v.findViewById(R.id.tabLayout)

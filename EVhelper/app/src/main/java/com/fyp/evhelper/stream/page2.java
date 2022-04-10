@@ -1,6 +1,8 @@
 package com.fyp.evhelper.stream;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,7 +43,7 @@ public class page2 extends Fragment {
     View context;
     ImageView loading_icon;
     RotateAnimation rotate;
-
+    String ip_address="";
 
     public void playVideo(String path){
         Intent intent = new Intent(getActivity(),AlertRecordVideo.class);
@@ -50,17 +52,16 @@ public class page2 extends Fragment {
         startActivity(intent);
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        Toast.makeText(getContext(),"page2 create",Toast.LENGTH_SHORT).show();
-    }
 
+    public void init_address(){
+        SharedPreferences preferences=getActivity().getSharedPreferences("parameter", Context.MODE_PRIVATE);
+        ip_address=preferences.getString("ip_address","");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        init_address();
         context = inflater.inflate(R.layout.fragment_page2, container, false);
 
         listView = context.findViewById(R.id.record_list_view);
@@ -97,7 +98,7 @@ public class page2 extends Fragment {
                public void onRefresh() {
                    loading.setVisibility(View.VISIBLE);
                    loading_icon.startAnimation(rotate);
-                   new RetrieveAlertRecord().execute("http://192.168.0.184:8080/AlertRecordJSON");
+                   new RetrieveAlertRecord().execute("http://"+ip_address+":8080/AlertRecordJSON");
 //                   Toast.makeText(getContext(),"refresh",Toast.LENGTH_SHORT).show();
                    refreshLayout.setRefreshing(false);
                }
@@ -113,7 +114,7 @@ public class page2 extends Fragment {
     public void getAlertReocrd(){
         loading.setVisibility(View.VISIBLE);
         loading_icon.startAnimation(rotate);
-        new RetrieveAlertRecord().execute("http://192.168.0.184:8080/AlertRecordJSON");
+        new RetrieveAlertRecord().execute("http://"+ip_address+":8080/AlertRecordJSON");
     }
 
     public void displayItem(){
@@ -133,9 +134,13 @@ public class page2 extends Fragment {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
             try{
+
+
                 URL url = new URL(strings[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.connect();
+
+                Log.d("In doInBackground",strings[0]);
 
                 InputStream stream = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream));
@@ -145,6 +150,7 @@ public class page2 extends Fragment {
                     buffer.append(line+"\n");
                 }
                 Log.w("JSON-STR",buffer.toString());
+
                 return buffer.toString();
             }catch(Exception e){
                 e.printStackTrace();
@@ -181,8 +187,8 @@ public class page2 extends Fragment {
                     JSONArray icon_path = obj.getJSONArray("icon_path");
                     setData = new ArrayList<>();
                     for (int i = 0; i < record_index.size(); i++) {
-                        String imagePath = "http://192.168.0.184:8080/image/"+icon_path.get(i);
-                        String videoPath = "http://192.168.0.184:8080/video/"+icon_path.get(i);
+                        String imagePath = "http://"+ip_address+":8080/image/"+icon_path.get(i);
+                        String videoPath = "http://"+ip_address+":8080/video/"+icon_path.get(i);
                         setData.add(new AlertRecord(record_date.get(i).toString(), imagePath,videoPath));
                     }
                     if(setData.size()==0){

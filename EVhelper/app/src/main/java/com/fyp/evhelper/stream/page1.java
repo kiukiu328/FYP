@@ -1,6 +1,8 @@
 package com.fyp.evhelper.stream;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -38,34 +42,32 @@ public class page1 extends Fragment {
     ImageView timing_picture;
     LinearLayout jump_btn;
     GetPicture getPicture=null;
-    Handler handler;
+    Handler handler,handler2;
     Intent page_configuration;
     Intent SecondPage;
     String ip_address ="";
     final int PORT = 9990;
+    String pictureChangeTime = "5";
+    String detectTime = "10";
+    ProgressBar pb;
+    boolean stopTimer = false;
+    TextView timer_tv;
+    SharedPreferences preferences;
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        init_server_address();
-//        init();
-//        Toast.makeText(getContext(),"page1 create",Toast.LENGTH_SHORT).show();
-    }
 
     public void init_server_address(){
+        SharedPreferences preferences=getActivity().getSharedPreferences("parameter", Context.MODE_PRIVATE);
+        ip_address=preferences.getString("ip_address","");
+
+        //Make sure the address value is exists
         if(ip_address.equals("")) {
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
-
             DatabaseReference ref = database.getReference().child("ip_address");
-            ref.addValueEventListener(new ValueEventListener() {
 
+            ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     ip_address = dataSnapshot.getValue().toString();
-                    System.out.println("set ip_address:"+ip_address);
-
-
                 }
 
                 @Override
@@ -74,16 +76,28 @@ public class page1 extends Fragment {
                 }
             });
         }
-
     }
+
+
 
     public void onStart(){
         super.onStart();
 //        Toast.makeText(getContext(),"page1 restart",Toast.LENGTH_SHORT).show();
-        if(getPicture!=null) {
+        if(getPicture == null) {
             getPicture= new GetPicture();
             getPicture.start();
         }
+        getParameters();
+    }
+
+    public void onResume(){
+        super.onResume();
+//        Toast.makeText(getContext(),"page1 resume",Toast.LENGTH_SHORT).show();
+        if(getPicture == null) {
+            getPicture= new GetPicture();
+            getPicture.start();
+        }
+        getParameters();
     }
 
     public void onStop(){
@@ -91,21 +105,26 @@ public class page1 extends Fragment {
 //        Toast.makeText(getContext(),"page1 Activity Stop",Toast.LENGTH_SHORT).show();
         if(getPicture!=null) {
             getPicture.setStopFlag(true);
+            getPicture=null;
         }
+        stopTimer = true;
     }
 
     public void onPause(){
         super.onPause();
         if(getPicture!=null) {
             getPicture.setStopFlag(true);
+            getPicture= null;
         }
+        stopTimer = true;
+
 //        Toast.makeText(getContext(),"page1 Activity pause",Toast.LENGTH_SHORT).show();
     }
 
     public void init(){
 
-        getPicture= new GetPicture();
-        getPicture.start();
+//        getPicture= new GetPicture();
+//        getPicture.start();
 
         SecondPage = new Intent(getActivity(), LiveStream.class);
         btn_live.setOnClickListener(new View.OnClickListener(){
@@ -114,6 +133,7 @@ public class page1 extends Fragment {
 //                Toast.makeText(getApplicationContext(),"show live click",Toast.LENGTH_SHORT).show();
                 SecondPage.putExtra("ip_address",ip_address);
                 startActivity(SecondPage);
+
             }
         });
 
@@ -123,7 +143,23 @@ public class page1 extends Fragment {
             }
         };
 
+        handler2 = new Handler(){
+            public void handleMessage(Message msg){
+                timer_tv.setText(String.valueOf((int)msg.obj));
+                pb.setProgress((int)msg.obj);
+            }
+        };
 
+
+    }
+
+    public void getParameters(){
+        preferences= getActivity().getSharedPreferences("parameter", Context.MODE_PRIVATE);
+        pictureChangeTime = preferences.getString("phone_change_time","5");
+        detectTime= preferences.getString("detect_time","10");
+
+        //set the parameter of progress bar
+        pb.setMax(Integer.parseInt(pictureChangeTime));
     }
 
     @Override
@@ -135,11 +171,14 @@ public class page1 extends Fragment {
         timing_picture=page1.findViewById(R.id.timing_picture);
         btn_live=page1.findViewById(R.id.btn_live);
         jump_btn = page1.findViewById(R.id.open_another);
-        page_configuration = new Intent(getActivity(), SettingsActivity.class);
+        timer_tv = page1.findViewById(R.id.timer_tv);
+        pb = page1.findViewById(R.id.progress_bar);
+
+        page_configuration = new Intent(getActivity(),SettingsActivity.class);
         jump_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                startActivity(page_configuration);
+                startActivityForResult(page_configuration,1);
             }
         });
 
@@ -150,13 +189,15 @@ public class page1 extends Fragment {
 
         Log.w("view","page1 view create");
         return page1;
+
+
     }
 
 
 
 
     class GetPicture extends Thread {
-//        ImageView img_container;
+        //        ImageView img_container;
         Socket socket;
         InputStream in;
         OutputStream out;
@@ -170,9 +211,7 @@ public class page1 extends Fragment {
             while (!stopFlag) {
                 if (ip_address != "") {
                     try {
-                        ip_address = "192.168.137.1";
                         socket = SocketFactory.getDefault().createSocket(ip_address, PORT);
-
 
                         in = socket.getInputStream();
                         out = socket.getOutputStream();
@@ -182,14 +221,21 @@ public class page1 extends Fragment {
 
                         buffer = new DataInputStream(new BufferedInputStream(in));
                         frame = buffer.readLine();
-                        if (frame == null)
+
+                        if(frame==null){
                             continue;
+                        }
+
                         String[] data = frame.split(",");
                         if (Integer.valueOf(data[0]) == data[1].length()) {
 //                        Log.d("picture_byte_length", "True");
                             byte[] decodedBytes = Base64.getDecoder().decode(data[1]);
                             show_img(decodedBytes);
-                            Thread.sleep(10 * 1000);
+                            int chengeTime = Integer.parseInt(pictureChangeTime);
+                            Log.w("change column","Photo changed");
+                            stopTimer=false;
+                            showTime();
+                            Thread.sleep(chengeTime * 1000);
                         } else {
 //                        Log.d("picture_byte_length", "False");
                         }
@@ -223,4 +269,25 @@ public class page1 extends Fragment {
     }
 
 
+    public void showTime(){
+        new Thread(new Runnable() {
+            Message msg;
+            @Override
+            public void run() {
+                for(int i = 1;i<=Integer.parseInt(pictureChangeTime);i++){
+                    try {
+                        if(stopTimer){
+                            break;
+                        }
+                        msg = new Message();
+                        msg.obj = i;
+                        handler2.sendMessage(msg);
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
 }
