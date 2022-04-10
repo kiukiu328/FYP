@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="@drawable/tool_bar_color2"
+            android:background="@drawable/tool_bar_color_y2"
             >
             <Button
                 android:layout_width="52dp"
@@ -44,7 +44,7 @@
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:layout_marginRight="104dp"
+                android:layout_marginRight="52dp"
                 android:textStyle="bold"/>
         </LinearLayout>
     </LinearLayout>
