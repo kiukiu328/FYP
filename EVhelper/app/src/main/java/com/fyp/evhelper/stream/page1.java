@@ -54,7 +54,6 @@ public class page1 extends Fragment {
     TextView timer_tv;
     SharedPreferences preferences;
 
-
     public void init_server_address(){
         SharedPreferences preferences=getActivity().getSharedPreferences("parameter", Context.MODE_PRIVATE);
         ip_address=preferences.getString("ip_address","");
@@ -77,7 +76,6 @@ public class page1 extends Fragment {
             });
         }
     }
-
 
 
     public void onStart(){
