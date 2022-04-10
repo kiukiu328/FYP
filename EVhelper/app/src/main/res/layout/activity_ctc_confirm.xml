@@ -33,7 +33,7 @@
                 app:iconGravity="textStart"
                 android:id="@+id/btn_back"
                 android:backgroundTint="@color/noColor"
-
+                android:layout_marginLeft="10dp"
                 ></Button>
             <TextView
                 android:layout_width="match_parent"
