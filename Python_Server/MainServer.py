@@ -63,7 +63,7 @@ def write_video(out):
     global flag_write_video, server
     while 1:
         out.write(server.frame2)
-        cv2.waitKey(20)
+        cv2.waitKey(10)
         if flag_write_video == False:
             break
 
