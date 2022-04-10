@@ -1,10 +1,12 @@
 package com.fyp.evhelper.stream;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,12 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fyp.evhelper.R;
+import com.xujiaji.happybubble.BubbleDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,39 +36,65 @@ import java.net.URL;
 public class SettingsActivity extends AppCompatActivity {
     LinearLayout btn_show_close;
     Button changeTimeBtn;
-    ImageButton leave_btn;
+    ImageButton leave_btn,question_support1,question_support2;
     LinearLayout test_layout;
-    EditText detectTime,previewValue;
-    TextView detectTimeTV,PreviewPictureTV,control_tv;
+    NumberPicker detectTime, previewValue;
+    TextView detectTimeTV, PreviewPictureTV, control_tv;
     boolean show = true;
+    SharedPreferences preferences;
+    String detectTimeValue = "10";
+    String previewTimeValue = "5";
 
-    String detectTimeValue="10";
-    String previewTimeValue="5";
-    public void showDetectTimePanel(){
+    public void showDetectTimePanel() {
         test_layout.setVisibility(View.VISIBLE);
         Animation aniFade = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
         test_layout.startAnimation(aniFade);
         control_tv.setText("Waiting for input");
-        show=false;
+        show = false;
     }
-    public void hideDetectTimePanel(){
 
-        show=true;
+    public void hideDetectTimePanel() {
+
+        show = true;
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
         control_tv.setText("Data Setting");
         test_layout.setVisibility(View.GONE);
-        detectTime.setText("");
-        previewValue.setText("");
+
+        get_value_number_picker();
+
         setStateText();
     }
 
-    public void setStateText(){
-        detectTimeTV.setText(detectTimeValue+" second");
-        PreviewPictureTV.setText(previewTimeValue+" second");
+    public void init_number_picker(){
+        detectTime.setMaxValue(40);
+        detectTime.setMinValue(10);
+        previewValue.setMaxValue(20);
+        previewValue.setMinValue(5);
+    }
+
+    public void get_value_number_picker(){
+        detectTime.setValue(Integer.parseInt(detectTimeValue));
+        previewValue.setValue(Integer.parseInt(previewTimeValue));
+    }
+
+    public void setStateText() {
+        preferences=this.getSharedPreferences("parameter", Context.MODE_PRIVATE);
+        previewTimeValue = preferences.getString("phone_change_time","5");
+        detectTimeValue=preferences.getString("detect_time","10");
+        detectTimeTV.setText(detectTimeValue + " second");
+        PreviewPictureTV.setText(previewTimeValue + " second");
+    }
+
+    public void saveParameter(){
+        SharedPreferences preferences=getSharedPreferences("parameter",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("detect_time", detectTimeValue);
+        editor.putString("phone_change_time", previewTimeValue);
+        editor.commit();
     }
 
     @Override
@@ -76,108 +106,99 @@ public class SettingsActivity extends AppCompatActivity {
         test_layout = findViewById(R.id.test_layout);
         changeTimeBtn = findViewById(R.id.change_time_btn);
         previewValue = findViewById(R.id.previewVal);
-        detectTimeTV=findViewById(R.id.detectTimeTV);
-        PreviewPictureTV=findViewById(R.id.PreviewPictureTV);
-        control_tv=findViewById(R.id.control_tv);
-        leave_btn=findViewById(R.id.leave_btn);
+        detectTimeTV = findViewById(R.id.detectTimeTV);
+        PreviewPictureTV = findViewById(R.id.PreviewPictureTV);
+        control_tv = findViewById(R.id.control_tv);
+        leave_btn = findViewById(R.id.leave_btn);
+        question_support1 = findViewById(R.id.question_support1);
+        question_support2= findViewById(R.id.question_support2);
 
+        init_number_picker();
 
-
-        leave_btn.setOnClickListener(new View.OnClickListener()
-        {
+        //show bubble
+        question_support1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showBubbleDialog("The system will send a notification when the " +
+                        "detect time equals "+detectTimeValue,question_support1);
+            }
+        });
+        question_support2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showBubbleDialog("The preview picture changes every "+previewTimeValue+" seconds",question_support2);
+            }
+        });
+        //end show bubble
+
+
+        leave_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideDetectTimePanel();
                 finish();
             }
         });
 
 
-        btn_show_close.setOnClickListener(new View.OnClickListener()
-        {
+
+
+        btn_show_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(show == true){
+                if (show == true) {
                     showDetectTimePanel();
-                }else{
+                } else {
                     hideDetectTimePanel();
                 }
             }
         });
 
 
-        changeTimeBtn.setOnClickListener(new View.OnClickListener()
-        {
+        changeTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                     String edit1 = detectTime.getText().toString();
-                    String edit2 = previewValue.getText().toString();
+                    String edit1 = Integer.toString(detectTime.getValue());
+                    String edit2 = Integer.toString(previewValue.getValue());
                     //Toast.makeText(getApplicationContext(),value_time, Toast.LENGTH_SHORT).show();
 
-                    if(edit1.equals("")){
-                        edit1=detectTimeValue;
-                    }else{
-                        detectTimeValue = edit1;
-                    }
-                    if(edit2.equals("")){
-                        edit2=previewTimeValue;
-                    }else{
-                        previewTimeValue = edit2;
-                    }
+//                    if (edit1.equals("")) {
+//                        edit1 = detectTimeValue;
+//                    } else {
+                    detectTimeValue = edit1;
+//                    }
+//                    if (edit2.equals("")) {
+//                        edit2 = previewTimeValue;
+//                    } else {
+                    previewTimeValue = edit2;
+//                    }
 
-                    int val = Integer.parseInt(edit1);
-                    int val2 = Integer.parseInt(edit2);
+//                    int val = Integer.parseInt(edit1);
+//                    int val2 = Integer.parseInt(edit2);
+//                    if ((val < 10 || val > 40) || (val2 < 0 || val2 > 20)) {
+//                        throw new Exception("Due to the security problem,please set a value between 10 and 40");
+//                    }
+                    ////
+                    saveParameter();
+                    ////
 
-                    if((val<10 || val > 40) || (val2<0 || val2>20)){
-                        throw new Exception("Due to the security problem,please set a value between 10 and 40");
-                    }
-
-
-                    changeDetectTime(detectTimeValue,previewTimeValue);
+                    changeDetectTime(detectTimeValue, previewTimeValue);
 
                     hideDetectTimePanel();
 
-                }
-                catch (Exception e){
-                    Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
         setStateText();
-        new RetrieveParameters().execute();
-
+        get_value_number_picker();
 
     }
 
-    public void changeDetectTime(String val1,String val2){
-        new Thread(new Runnable(){
-            @Override
-            public void run() {
-                Log.w("running","enter the thread");
-                try {
-                    String path = "http://192.168.0.184:8080/setParameters?detectTime=" + val1 +"&previewPictureTime="+val2;
-                    URL url = new URL(path);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.connect();
-
-                    int responseCode = connection.getResponseCode();
-                    if(responseCode == HttpURLConnection.HTTP_OK){
-                        InputStream inputStream = connection.getInputStream();
-                        String result = is2String(inputStream);
-                        Looper.prepare();
-                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                        Looper.loop();
-                    }
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-
-    public String is2String(InputStream is){
+    public String is2String(InputStream is) {
         try {
 
             BufferedReader bufferedReader = new BufferedReader(new
@@ -192,53 +213,50 @@ public class SettingsActivity extends AppCompatActivity {
 
             response = stringBuilder.toString().trim();
             return response;
-        }catch (Exception e){
+        } catch (Exception e) {
             return "";
         }
 
     }
 
-    class RetrieveParameters extends AsyncTask<String,String,String>{
-        @Override
-        protected String doInBackground(String... strings) {
-            Log.w("running","enter the async");
-            try {
-                String path = "http://192.168.0.184:8080/getParameters";
-                URL url = new URL(path);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.connect();
-
-                int responseCode = connection.getResponseCode();
-                if(responseCode == HttpURLConnection.HTTP_OK){
-                    InputStream inputStream = connection.getInputStream();
-                    String result = is2String(inputStream);
-                    return result;
-                }
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-
-
-            return "";
-        }
-
-        protected void onPostExecute(String s) {
-            Log.w("running","onPostExecute");
-            Log.w("running",s);
-            if(!s.equals("")) {
+    public void changeDetectTime(String val1, String val2) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.w("running", "enter the thread");
                 try {
-                    JSONObject obj = new JSONObject(s);
-                    detectTimeValue = obj.getString("DetectTime");
-                    previewTimeValue = obj.getString("PreviewPictureTime");
-                    setStateText();
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "JSON parse fail", Toast.LENGTH_SHORT).show();
+                    String path = "http://192.168.0.184:8080/setParameters?detectTime=" + val1 + "&previewPictureTime=" + val2;
+                    URL url = new URL(path);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.connect();
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        InputStream inputStream = connection.getInputStream();
+                        String result = is2String(inputStream);
+                        Looper.prepare();
+                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                        Looper.loop();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-
-        }
+        }).start();
     }
 
+    public void showBubbleDialog(String msg,View clickView){
+        View content = LayoutInflater.from(this).inflate(R.layout.message_support_setting,null);
+        TextView text = content.findViewById(R.id.message_support_text);
+        text.setText(msg);
+
+        new BubbleDialog(this)
+                .setBubbleContentView(content)
+                .setClickedView(clickView)
+                .setTransParentBackground()
+                .setPosition(BubbleDialog.Position.BOTTOM)
+                .show();
+    }
 
 }

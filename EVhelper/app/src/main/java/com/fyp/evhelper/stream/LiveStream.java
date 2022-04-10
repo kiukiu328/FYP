@@ -55,11 +55,11 @@ public class LiveStream extends AppCompatActivity {
         if(play_pause){
             getFrame.setShow_frame(false);
             play_pause=false;
-            stop_play_btn.setImageBitmap(pause);
+            stop_play_btn.setImageBitmap(start);
         }else{
             getFrame.setShow_frame(true);
             play_pause=true;
-            stop_play_btn.setImageBitmap(start);
+            stop_play_btn.setImageBitmap(pause);
         }
     }
 
@@ -77,7 +77,6 @@ public class LiveStream extends AppCompatActivity {
         stop_play_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"exit button",Toast.LENGTH_SHORT).show();
                 controlVideo();
             }
         });
@@ -86,7 +85,7 @@ public class LiveStream extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"exit button",Toast.LENGTH_SHORT).show();
-                finish();
+                startActivity(FirstPage);
             }
         });
 
@@ -130,8 +129,8 @@ public class LiveStream extends AppCompatActivity {
 
         public void run(){
             while(!stopFlag) {
-                if (!"".equals(ip_address)) {
-                    if (show_frame) {
+                if (ip_address != "") {
+                    if (show_frame == true) {
                         try {
                             Socket socket = SocketFactory.getDefault().createSocket(ip_address, PORT);
 
@@ -179,5 +178,6 @@ public class LiveStream extends AppCompatActivity {
             }
         }
     }
+
 
 }
