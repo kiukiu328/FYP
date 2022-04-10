@@ -25,5 +25,6 @@
     <color name="noColor_gray">#C1777777</color>
     <color name="spr_bg_red">#E88E0000</color>
     <color name="spr_bg_yellow">#FFC300</color>
+    <color name="spr_bg_yellow2">#FFC311</color>
     <color name="spr_bg_red2">#ED930000</color>
 </resources>
