@@ -10,7 +10,7 @@ import base64
 from threading import Timer
 import AlertMessaging
 from FirebaseDB import UpdateAddress, InitFirebase
-from MySQLDatabase import UploadVideoRecord, GetAlertRecord
+from MySQLDatabase import UploadVideoRecord, GetAlertRecord,UpdateAlertRecord
 import GetNetworkAddress
 import os, sys
 from pathlib import Path
@@ -63,7 +63,7 @@ def write_video(out):
     global flag_write_video, server
     while 1:
         out.write(server.frame2)
-        cv2.waitKey(10)
+        cv2.waitKey(5)
         if flag_write_video == False:
             break
 
@@ -97,9 +97,9 @@ def zipVideo(file, target):
     # dir = file.strip(".avi")
     # command = "ffmpeg -i %s.avi %s.mp4" % (dir, target)
     # call(command.split())
-    val = subprocess.call(
-        'ffmpeg -i ' + file.replace(" ", "\\ ") + " -c:v libx264 -preset medium -qp 35 " + target.replace(" ", "\\ "),
-        shell=True)
+    return_msg = subprocess.call('ffmpeg -i ' + file.replace(" ", "\\ ") + " -c:v libx264 -preset medium -qp 35 " + target.replace(" ", "\\ "),shell=True)
+    if return_msg==0:
+        UpdateAlertRecord.updateVideoState(file_name, 1)
 
 
 # 截图
