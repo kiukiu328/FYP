@@ -88,12 +88,12 @@ def video_write_init(video_name):
     print("stop recording")
     # UploadVideoRecord.save_video(video_path)
 
-    zipVideo(video_Buffer, target_path)
+    zipVideo(video_name,video_Buffer, target_path)
     out.release()
 
 
 # 轉換成 可播放格式
-def zipVideo(file, target):
+def zipVideo(file_name,file, target):
     # dir = file.strip(".avi")
     # command = "ffmpeg -i %s.avi %s.mp4" % (dir, target)
     # call(command.split())
