@@ -132,7 +132,7 @@
                         android:spinnerMode="dropdown"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:popupBackground="@color/spr_bg_red"/>
+                        android:popupBackground="@color/spr_bg_yellow"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -156,7 +156,7 @@
                         android:spinnerMode="dropdown"
                         android:textStyle="bold"
                         android:textColor="@color/white"
-                        android:popupBackground="@color/spr_bg_red"/>
+                        android:popupBackground="@color/spr_bg_yellow"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -179,7 +179,7 @@
                         android:id="@+id/spr_centreName"
                         android:spinnerMode="dropdown"
                         android:lineSpacingExtra="10sp"
-                        android:popupBackground="@color/spr_bg_red"
+                        android:popupBackground="@color/spr_bg_yellow"
 
                         />
                 </LinearLayout>
