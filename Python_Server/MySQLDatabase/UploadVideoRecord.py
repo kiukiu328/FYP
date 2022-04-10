@@ -13,8 +13,8 @@ def save_video(file):
     )
 
     cursor = db.cursor()
-    sql_format = "insert into alert_record(alertRecord_time,VideoPath,RecordIcon) values(\"{record_time}\",\"{videoPath}\",\"{IconPath}\")"
-    sql = sql_format.format(record_time=StartTime,videoPath=file,IconPath=file)
+    sql_format = "insert into alert_record(alertRecord_time,VideoPath,RecordIcon,video_state) values(\"{record_time}\",\"{videoPath}\",\"{IconPath}\",{video_state})"
+    sql = sql_format.format(record_time=StartTime,videoPath=file,IconPath=file,video_state=0)
     print(sql)
     cursor.execute(sql)
     db.commit()

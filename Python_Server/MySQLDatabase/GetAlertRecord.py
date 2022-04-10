@@ -27,12 +27,14 @@ def getDataDict():
     dict_data = {"record_index":[],
                  "record_date":[],
                  "video_path":[],
-                 "icon_path":[]}
+                 "icon_path":[],
+                 "video_state":[]}
     for i in data:
         dict_data["record_index"].append(str(i[0]))
         dict_data["record_date"].append(str(i[1]))
         dict_data["video_path"].append(str(i[2]))
         dict_data["icon_path"].append(str(i[3]))
+        dict_data["video_state"].append(i[4]==1)
     return dict_data
 
 def getDataJson():
