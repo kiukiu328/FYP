@@ -2,6 +2,7 @@ from flask import Flask, request
 import mysql.connector
 import geopy.distance
 import AlertPolice
+import GetNetworkAddress
 
 mydb = mysql.connector.connect(
     host="localhost",
@@ -89,4 +90,4 @@ def sendToken():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host=GetNetworkAddress.get_WLAN_address())
