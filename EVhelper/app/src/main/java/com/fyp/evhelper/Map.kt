@@ -67,7 +67,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private var parkMarkers: ArrayList<MutableMap<String, Any>> = ArrayList()
     private var markerInfo = mutableMapOf<String, Any>()
     private lateinit var sortedChargeMarkers: ArrayList<MutableMap<String, Any>>
-
+// for the save name to a readable name
     private val socketList = mapOf(
         "GBQSocket" to "Quick - GB/T 20234.2",
         "IECComSocket" to "Quick - CCS Combo 2",
@@ -90,12 +90,12 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private lateinit var infoCardText: TextView
     private lateinit var booking: Button
     private lateinit var navigation: Button
-
+// when the location change send the location to server
     var float: FloatArray = floatArrayOf(0f)
     private val locationListener: LocationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             Log.d("onLocationChanged", "" + location.longitude + ":" + location.latitude)
-
+//move the camera
             lastLocation = location
             try {
                 val currentLatLong = LatLng(lastLocation.latitude, lastLocation.longitude)
@@ -116,6 +116,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
                     }
                     setTV()
                 }
+//                send location to server
                 GlobalScope.launch {
                     withContext(Dispatchers.IO) {
                         try {
@@ -135,7 +136,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
                 Log.d(null, e.toString())
             }
         }
-
+// implement interface method
         override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
         override fun onProviderDisabled(provider: String) {}
         override fun onProviderEnabled(provider: String) {}
@@ -154,9 +155,10 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
         mapFragment.getMapAsync(this)
 
-
+// set the map
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         locationManager = context?.getSystemService(LOCATION_SERVICE) as LocationManager?
+//        ask for permission
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -214,6 +216,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
             checkBoxs[key] = cb
             ll.addView(cb)
         }
+//        set scope filter
         scopeBtn.setOnCheckedChangeListener { _, isChecked ->
             circle.isVisible = isChecked
             if (!isChecked) {
@@ -245,7 +248,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
                 override fun onStopTrackingTouch(p0: SeekBar?) {}
 
             })
-
+// set distance
             etNum.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
@@ -269,6 +272,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
             alert.show()
             true
         }
+//        set charge filter
         chargeBtn.setOnCheckedChangeListener { _, isChecked ->
 
             var haveSocket: Boolean
@@ -294,6 +298,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
                         (i["marker"] as Marker).isVisible = haveSocket
                     }
         }
+//      charge filter
         chargeBtn.setOnLongClickListener {
             infoCard.isVisible = false
             chargeFilter.isVisible = true
@@ -417,6 +422,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
             parkMarkers = ArrayList()
             var jObjChargeStation = JSONArray()
             var jObjVacancy = JSONArray()
+//            load data from server
             try {
                 (URL("https://${MainActivity.SERVER_PATH}/python/main.py?type=echarge_en").openConnection() as HttpsURLConnection).apply {
                     sslSocketFactory = createSocketFactory(listOf("TLSv1.2"))
@@ -451,7 +457,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
                     name = jObjChargeStation.getJSONObject(i).getString("carPark")
                     latitude = jObjChargeStation.getJSONObject(i).getDouble("latitude")
                     longitude = jObjChargeStation.getJSONObject(i).getDouble("longitude")
-
+//set the information box display data
                     snippet += "<p>Addresss: ${
                         jObjChargeStation.getJSONObject(i).get("address")
                     }</p>"
@@ -600,6 +606,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
+//        set display info and zoom in
         infoCardText.text =
             HtmlCompat.fromHtml("<h1>${p0?.title}</h1>${p0?.snippet}", FROM_HTML_MODE_LEGACY)
         infoCard.isVisible = true
@@ -609,7 +616,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
         return true
     }
-
+//  link server with ssl
     private fun createSocketFactory(protocols: List<String>) =
         SSLContext.getInstance(protocols[0]).apply {
             val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
@@ -624,7 +631,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
         }.socketFactory
 
     private fun setTV() {
-
+// Set the textview
         for (i in chargeMarkers) {
 
             Location.distanceBetween(
@@ -656,7 +663,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
             Log.d(null, e.toString())
         }
     }
-
+// send http post request to server for notification function
     fun sendPostRequest(id: String, latitude: String, longitude: String) {
 
         var reqParam = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8")

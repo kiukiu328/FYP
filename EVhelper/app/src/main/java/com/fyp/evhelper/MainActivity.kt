@@ -23,7 +23,9 @@ import java.net.URL
 import java.net.URLEncoder
 import com.fyp.evhelper.stream.*
 
+// for other program to go back homepage
 lateinit var animatedBottomBar: AnimatedBottomBar
+
 class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.simpleName
     lateinit var fManager: FragmentManager
@@ -31,25 +33,27 @@ class MainActivity : AppCompatActivity() {
     lateinit var mapFragment: Fragment
     lateinit var streamFragment: Fragment
     lateinit var reminderFragment: Fragment
+
+    //    set the companion object for other program to get the public
     companion object {
         var androidID: String = ""
         val SERVER_PATH = "192.168.1.171"
-        fun homePage(){
+        fun homePage() {
             animatedBottomBar.selectTabAt(2)
         }
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
+//        androidID for identify the device fo notification
         androidID = Settings.Secure.getString(
             applicationContext.contentResolver,
             Settings.Secure.ANDROID_ID
         )
         println("androidID:" + androidID)
         var token = ""
+//        Firebase for getting messaging
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Log.w(
@@ -70,12 +74,11 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
+// set all parameter
         setContentView(R.layout.activity_main)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
 
         animatedBottomBar = findViewById(R.id.animatedBottomBar)
-
         animatedBottomBar.selectTabById(R.id.home, true)
         fManager = supportFragmentManager
         homeFragment = Home()
@@ -84,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         reminderFragment = ReminderMainPage()
         fManager!!.beginTransaction().replace(R.id.fragment_container, homeFragment)
             .commit()
-
+// set the navigation bar
         animatedBottomBar.setOnTabSelectListener(object : AnimatedBottomBar.OnTabSelectListener {
             override fun onTabSelected(
                 lastIndex: Int,
@@ -112,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
+    // send Token to server for notification
     fun sendToken(id: String, token: String) {
         var reqParam = URLEncoder.encode("id", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8")
         reqParam += "&" + URLEncoder.encode("token", "UTF-8") + "=" + URLEncoder.encode(
@@ -132,7 +135,7 @@ class MainActivity : AppCompatActivity() {
             wr.write(reqParam)
             wr.flush()
 
-
+//        read the response
             BufferedReader(InputStreamReader(inputStream)).use {
                 val response = StringBuffer()
 

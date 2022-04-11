@@ -6,14 +6,13 @@ import android.view.View
 import android.widget.TextView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-
+// for customize the information box in map page
 class CustomInfoWindowAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
     val mWindow: View = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null)
 
     private fun rendowWindowText(marker: Marker?, view: View) {
         view.findViewById<TextView>(R.id.title).text = marker?.title ?: ""
         view.findViewById<TextView>(R.id.snippet).text = marker?.snippet ?: ""
-
 
     }
 

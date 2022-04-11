@@ -81,13 +81,14 @@ class Home : Fragment() {
         }
         return v
     }
-
+// when fragment not focus in home page stop the functions
     override fun onDestroyView() {
         super.onDestroyView()
         viewDestroy = true
     }
 
     companion object {
+//        set the nearest charge station list
         fun setTop10(mk: ArrayList<MutableMap<String, Any>>) {
             markers = mk
             if (markers.size == 0)
