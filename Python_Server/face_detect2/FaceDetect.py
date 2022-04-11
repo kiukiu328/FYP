@@ -1,8 +1,11 @@
 import cv2
+import threading
 import pandas
 import imutils
 from datetime import datetime
 count = 0
+# num=0
+# detect_result = False
 
 # Assigning our static_back to None
 static_back = None
@@ -71,6 +74,7 @@ def motion_detect(frame):
 model_bin = "./src/res10_300x300_ssd_iter_140000_fp16.caffemodel"
 config_text = "./src/deploy.prototxt"
 
+
 # load caffe model
 net = cv2.dnn.readNetFromCaffe(config_text, model_bin)
 
@@ -79,7 +83,14 @@ net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 def face_detect(image):
     global count
-
+    # timer = threading.Timer(1, alert)
+    # timer.start()
+    # cap = cv2.VideoCapture("5.mp4")
+    # cap = cv2.VideoCapture(0)
+    # cap = cv2.VideoCapture("5.mp4")
+    # cap = cv2.VideoCapture("4.mp4")
+        # image = cv2.flip(image, 1)
+        # 人脸检测
     h, w = image.shape[:2]
     blobImage = cv2.dnn.blobFromImage(image, 1.0, (300, 300), (104.0, 177.0, 123.0), False, False);
     net.setInput(blobImage)
@@ -96,25 +107,81 @@ def face_detect(image):
         score = float(detection[2])
         # objIndex = int(detection[1])
         if score > 0.5:
-            count+=1
+
             left = detection[3]*w
             top = detection[4]*h
             right = detection[5]*w
             bottom = detection[6]*h
 
-            # 绘制
-            cv2.rectangle(image, (int(left), int(top)), (int(right), int(bottom)), (255, 0, 0), thickness=2)
-            cv2.putText(image, "score:%.2f"%score, (int(left), int(top)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
+
+            if((bottom-top) > 100):
+                count += 1
+
+                text_size_ = cv2.getTextSize("Danger",cv2.FONT_HERSHEY_SIMPLEX,0.5,thickness=1)
+                text_width,text_height = text_size_[0]
+
+                # 绘制
+                cv2.rectangle(image, (int(left), int(top)), (int(right), int(bottom)), (0, 0, 255), thickness=2)
+
+                cv2.rectangle(image, (int(left) - 15, int(top) - 8),(int(left) - 15 + text_width, int(top) - 10-text_height), (0, 0, 255), -1)
+                cv2.putText(image, "Danger", (int(left)-15, int(top)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+                cv2.putText(image, "score:%.2f"%score, (int(left)+50, int(top)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0,255 ), 1)
+            else:
+                text_size_ = cv2.getTextSize("Normal", cv2.FONT_HERSHEY_SIMPLEX, 0.5, thickness=1)
+                text_width, text_height = text_size_[0]
+
+                cv2.rectangle(image, (int(left), int(top)), (int(right), int(bottom)), (0, 255, 0), thickness=2)
+                cv2.rectangle(image, (int(left) - 15, int(top) - 8),(int(left) - 15 + text_width, int(top) - 10-text_height), (0, 255, 0), -1)
+                cv2.putText(image, "Normal", (int(left)-15, int(top)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+                cv2.putText(image, "score:%.2f" % score, (int(left)+50, int(top)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 255, 0), 1)
 
     cv2.putText(image, "Count: %s"%count, (int(0), int(35)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0),1)
     return image
 
 
 
+# def detect():
+#     # cap = cv2.VideoCapture(0)
+#     cap = cv2.VideoCapture("5.mp4")
+#     while True:
+#         ret, image = cap.read()
+#         # image = cv2.flip(image, 1)
+#         if ret is False:
+#             break
+#
+#         # image= motion_detect(image)
+#         image = face_detect(image)
+#         image =motion_detect(image)
+#         cv2.imshow('face-detection-demo', image)
+#         c = cv2.waitKey(2)
+#         if c == 27:
+#             break
+#     cv2.waitKey(0)
+#     cv2.destroyAllWindows()
+
+
 def detect(frame):
+    # cap = cv2.VideoCapture(0)
+    # cap = cv2.VideoCapture("5.mp4")
+    # while True:
+    #     ret, image = cap.read()
+        # image = cv2.flip(image, 1)
+        # if ret is False:
+        #     break
+
+    # image= motion_detect(image)
     frame = imutils.resize(frame, width=min(800, frame.shape[1]))
     image = face_detect(frame)
+    # image =motion_detect(image)
+
+    # cv2.imshow('face-detection-demo', image)
+
+    # c = cv2.waitKey(2)
     cv2.waitKey(2)
+    #     if c == 27:
+    #         break
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     return image
 
 if __name__=="__main__":

@@ -127,7 +127,7 @@ def generateFileName():
 def alert():
     global num, face_detect_module, alert_signal, flag_write_video, recording_state, alert_timer
     count = face_detect_module.count
-    # print("Detected time is:", num, "Count is:", count)
+    print("Detected time is:", num, "Count is:", count)
 
     if count == 0:
         num = 0
@@ -241,10 +241,12 @@ def print_frame():
                 # print frame
                 # print(server.frame2)
                 detectedImage = face_detect_module.detect(server.frame2)
-                policeImage = Detect_Police.detect(server.frame2)
+                # policeImage = Detect_Police.detect(server.frame2)
+
                 # true and false
 
-                cv2.imshow("policeImage", policeImage)
+                # cv2.imshow("policeImage", policeImage)
+                cv2.imshow("frame container", detectedImage)
                 # cv2.waitKey(1)
 
 
