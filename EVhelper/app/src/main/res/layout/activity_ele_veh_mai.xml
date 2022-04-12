@@ -77,7 +77,7 @@
             android:layout_marginLeft="20dp"
             android:spinnerMode="dropdown"
             android:textSize="18sp"
-            android:popupBackground="@color/spr_bg_red"
+            android:popupBackground="@color/spr_bg_yellow"
             />
     </LinearLayout>
     <LinearLayout
@@ -91,7 +91,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Maintenance Cycle : "
+            android:text="Services Cycle :        "
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -102,7 +102,7 @@
             android:layout_marginLeft="20dp"
             android:spinnerMode="dropdown"
             android:textSize="18sp"
-            android:popupBackground="@color/spr_bg_red"
+            android:popupBackground="@color/spr_bg_yellow"
             />
     </LinearLayout>
     </LinearLayout>
