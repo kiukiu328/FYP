@@ -1,6 +1,7 @@
 package com.fyp.evhelper.stream
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -32,7 +33,7 @@ class Stream : Fragment() {
             ref.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     ip_address = dataSnapshot.value.toString()
-//                    saveAddress(ip_address)
+                    saveAddress(ip_address)
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -44,7 +45,7 @@ class Stream : Fragment() {
 
     fun saveAddress(address: String?) {
         val preferences: SharedPreferences =
-        requireContext().getSharedPreferences("parameter", Context.MODE_PRIVATE)
+            requireContext().getSharedPreferences("parameter", Context.MODE_PRIVATE)
         val editor = preferences.edit()
         editor.putString("ip_address", address)
         editor.commit()
@@ -67,7 +68,7 @@ class Stream : Fragment() {
                 val show_view: View = makeTabView(position)
                 tab.customView = show_view
             }).attach()
-
+        requireActivity().startService(Intent(activity, MyFirebaseMessagingService::class.java));
         return v
     }
 

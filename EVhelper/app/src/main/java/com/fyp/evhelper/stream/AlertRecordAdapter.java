@@ -33,10 +33,19 @@ public class AlertRecordAdapter extends ArrayAdapter<AlertRecord> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         @SuppressLint("ViewHolder") View view = layoutInflater.inflate(resource,null,false);
-//        TextView date= (TextView)view.findViewById(R.id.alert_item_date);
-//        ImageView img_view = view.findViewById(R.id.record_alert_icon);
-//        date.setText(setData.get(position).getDate());
-//        Picasso.with(context).load(setData.get(position).getIconPath()).into(img_view);
+        TextView date= (TextView)view.findViewById(R.id.alert_item_date);
+        ImageView img_view = view.findViewById(R.id.record_alert_icon);
+
+
+
+        date.setText(setData.get(position).getDate());
+
+        Picasso.with(context).load(setData.get(position).getIconPath()).into(img_view);
+        if(setData.get(position).getVideoState() == true){
+            ImageView img_video_state = view.findViewById(R.id.video_state_icon);
+            img_video_state.setImageResource(R.drawable.video_icon);
+        }
+
         return view;
     }
 }

@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import androidx.fragment.app.Fragment;
 
@@ -57,6 +59,8 @@ public class page1 extends Fragment {
     public void init_server_address(){
         SharedPreferences preferences=getActivity().getSharedPreferences("parameter", Context.MODE_PRIVATE);
         ip_address=preferences.getString("ip_address","");
+
+        Log.w("ip_address sssss",ip_address);
 
         //Make sure the address value is exists
         if(ip_address.equals("")) {
@@ -100,7 +104,7 @@ public class page1 extends Fragment {
 
     public void onStop(){
         super.onStop();
-//        Toast.makeText(getContext(),"page1 Activity Stop",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(),"page1 Activity Stop",Toast.LENGTH_LONG).show();
         if(getPicture!=null) {
             getPicture.setStopFlag(true);
             getPicture=null;
@@ -183,6 +187,7 @@ public class page1 extends Fragment {
 
 
         init_server_address();
+
         init();
 
         Log.w("view","page1 view create");
@@ -201,9 +206,6 @@ public class page1 extends Fragment {
         OutputStream out;
         DataInputStream buffer;
         private volatile boolean stopFlag = false;
-//        public GetPicture(ImageView img_container){
-//            this.img_container=img_container;
-//        }
 
         public void run() {
             while (!stopFlag) {

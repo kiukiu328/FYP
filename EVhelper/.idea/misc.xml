@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Github/Data/FYP/EVhelper/app/src/main/res/drawable-mdpi/live_stream_border.xml" value="0.1" />
+        <entry key="..\:/Github/Data/FYP/EVhelper/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Github/Data/FYP/EVhelper/app/src/main/res/layout/fragment_page1.xml" value="0.1" />
+        <entry key="..\:/Github/Data/FYP/EVhelper/app/src/main/res/layout/fragment_page2.xml" value="0.215625" />
+        <entry key="..\:/Github/Data/FYP/EVhelper/app/src/main/res/layout/list_item.xml" value="0.1" />
+        <entry key="..\:/Github/Data/FYP/EVhelper/app/src/main/res/layout/live_stream_page.xml" value="0.14163090128755365" />
         <entry key="..\:/Mine/IT/FYP/EVhelper/app/src/main/res/drawable/ic_toggle_scope.xml" value="0.461" />
         <entry key="..\:/Mine/IT/FYP/EVhelper/app/src/main/res/drawable/test.xml" value="0.461" />
         <entry key="..\:/Mine/IT/FYP/EVhelper/app/src/main/res/layout/activity_book.xml" value="0.31145833333333334" />

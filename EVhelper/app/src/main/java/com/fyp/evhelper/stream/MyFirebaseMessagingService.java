@@ -10,26 +10,52 @@ import android.media.RingtoneManager;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.fyp.evhelper.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    public void onCreate(){
+        super.onCreate();
+        Log.w("FirebaseFile", "FirebaseFile initial");
+
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()) {
+                    Log.w("FCM", "Fetching FCM registration token failed", task.getException());
+                    return;
+                }
+
+                // Get new FCM registration token
+                String token = task.getResult();
+
+                onNewToken(token);
+            }
+        });
+    }
+
+
+
     @Override
     public void onNewToken(String token) {
+        super.onNewToken(token);
         Log.d("Token", "Refreshed token: " + token);
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // FCM registration token to your app server.
         sendRegistrationToServer(token);
-
     }
 
 
@@ -104,7 +130,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         DatabaseReference ref = database.getReference().child("AndroidToken");
         ref.setValue(token);
     }
-
-
 
 }

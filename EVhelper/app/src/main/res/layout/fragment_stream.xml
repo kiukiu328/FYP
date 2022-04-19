@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".stream.Stream"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <com.google.android.material.tabs.TabLayout
+        android:background="@color/white"
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +18,7 @@
         app:tabSelectedTextColor="@color/green"
         app:tabIndicatorColor="@color/green"
         app:tabIndicatorHeight="2dp"
-        android:background="@color/white">
+        >
 
 
 
@@ -27,5 +29,6 @@
         android:id="@+id/viewPager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
        />
 </LinearLayout>

@@ -22,6 +22,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fyp.evhelper.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.xujiaji.happybubble.BubbleDialog;
 
 import org.json.JSONException;
@@ -44,6 +49,33 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences preferences;
     String detectTimeValue = "10";
     String previewTimeValue = "5";
+    String ip_address = "";
+
+    public void init_server_address(){
+        SharedPreferences preferences=this.getSharedPreferences("parameter", Context.MODE_PRIVATE);
+        ip_address=preferences.getString("ip_address","");
+
+        Log.w("ip_address sssss",ip_address);
+
+        //Make sure the address value is exists
+        if(ip_address.equals("")) {
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference ref = database.getReference().child("ip_address");
+
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    ip_address = dataSnapshot.getValue().toString();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+        }
+    }
+
 
     public void showDetectTimePanel() {
         test_layout.setVisibility(View.VISIBLE);
@@ -113,6 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
         question_support1 = findViewById(R.id.question_support1);
         question_support2= findViewById(R.id.question_support2);
 
+        init_server_address();
         init_number_picker();
 
         //show bubble
@@ -225,7 +258,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void run() {
                 Log.w("running", "enter the thread");
                 try {
-                    String path = "http://192.168.0.184:8080/setParameters?detectTime=" + val1 + "&previewPictureTime=" + val2;
+                    String path = "http://"+ip_address+":8080/setParameters?detectTime=" + val1 + "&previewPictureTime=" + val2;
                     URL url = new URL(path);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");

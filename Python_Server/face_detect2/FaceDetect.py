@@ -71,9 +71,10 @@ def motion_detect(frame):
 
 
 
+# model_bin = "res10_300x300_ssd_iter_140000_fp16.caffemodel";
+# config_text = "deploy.prototxt";
 model_bin = "./src/res10_300x300_ssd_iter_140000_fp16.caffemodel"
 config_text = "./src/deploy.prototxt"
-
 
 # load caffe model
 net = cv2.dnn.readNetFromCaffe(config_text, model_bin)
@@ -101,7 +102,7 @@ def face_detect(image):
     count=0
     fps = 1000 / (t * 1000.0 / cv2.getTickFrequency())
     label = 'FPS: %.2f' % fps
-    cv2.putText(image, label, (0, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0))
+    cv2.putText(image, label, (5, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0))
     # 绘制检测矩形
     for detection in cvOut[0,0,:,:]:
         score = float(detection[2])
@@ -135,7 +136,7 @@ def face_detect(image):
                 cv2.putText(image, "Normal", (int(left)-15, int(top)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
                 cv2.putText(image, "score:%.2f" % score, (int(left)+50, int(top)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(0, 255, 0), 1)
 
-    cv2.putText(image, "Count: %s"%count, (int(0), int(35)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0),1)
+    cv2.putText(image, "Count: %s"%count, (int(5), int(35)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0),1)
     return image
 
 
@@ -173,15 +174,10 @@ def detect(frame):
     frame = imutils.resize(frame, width=min(800, frame.shape[1]))
     image = face_detect(frame)
     # image =motion_detect(image)
-
     # cv2.imshow('face-detection-demo', image)
 
-    # c = cv2.waitKey(2)
-    cv2.waitKey(2)
-    #     if c == 27:
-    #         break
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    # cv2.waitKey(2)
+
     return image
 
 if __name__=="__main__":

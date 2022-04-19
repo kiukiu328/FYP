@@ -1,14 +1,15 @@
 package com.fyp.evhelper.stream;
 
 public class AlertRecord {
-
     private String date;
     private String iconPath;
     private String videoPath;
-    public AlertRecord(String date,String iconPath,String videoPath){
+    private boolean videoState;
+    public AlertRecord(String date,String iconPath,String videoPath,boolean videoState){
         this.iconPath=iconPath;
         this.date=date;
         this.videoPath=videoPath;
+        this.videoState=videoState;
     }
 
     public String getIconPath() {
@@ -32,5 +33,13 @@ public class AlertRecord {
 
     public void setVideoPath(String videoPath) {
         this.videoPath = videoPath;
+    }
+
+    public boolean getVideoState(){
+        return videoState;
+    }
+
+    public void setVideoState(boolean videoState){
+        this.videoState=videoState;
     }
 }
