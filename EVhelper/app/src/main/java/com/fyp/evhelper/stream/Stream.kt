@@ -57,6 +57,7 @@ class Stream : Fragment() {
     ): View? {
         //初始化地址
         init_ip_address()
+        requireActivity().startService(Intent(activity, MyFirebaseMessagingService::class.java));
         val v: View = inflater.inflate(R.layout.fragment_stream, container, false)
         viewPager2 = v.findViewById(R.id.viewPager2)
         tabLayout = v.findViewById(R.id.tabLayout)
@@ -68,7 +69,7 @@ class Stream : Fragment() {
                 val show_view: View = makeTabView(position)
                 tab.customView = show_view
             }).attach()
-        requireActivity().startService(Intent(activity, MyFirebaseMessagingService::class.java));
+
         return v
     }
 
