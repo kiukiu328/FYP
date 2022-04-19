@@ -237,6 +237,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
             val sbNum: SeekBar = dialogView.findViewById(R.id.sbNum)
             val etNum: EditText = dialogView.findViewById(R.id.etNum)
             etNum.setText(circle.radius.toString())
+            sbNum.progress = circle.radius.toInt()
             sbNum.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
                 override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                     etNum.setText(sbNum.progress.toString())
@@ -254,6 +255,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     sbNum.progress = Integer.parseInt(etNum.text.toString())
+
                     Log.d("onTextChanged", sbNum.progress.toString())
                 }
 
@@ -262,7 +264,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
             })
 
             val builder = AlertDialog.Builder(v.context)
-            builder.setMessage("Are you sure you want to Delete?")
+            builder.setMessage("Select distance (m)")
                 .setCancelable(false)
                 .setPositiveButton("OK") { _, _ ->
                     circle.radius = etNum.text.toString().toDouble()

@@ -9,13 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="10000"
-        android:min="100">
+        android:min="0">
     </SeekBar>
     <EditText
         android:id="@+id/etNum"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:inputType="number"
+        android:inputType="number|none"
+        android:maxLength="4"
+        android:digits="0123456789"
         android:text="10"
         ></EditText>
 </LinearLayout>

@@ -85,7 +85,7 @@ public class LiveStream extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"exit button",Toast.LENGTH_SHORT).show();
-                startActivity(FirstPage);
+               finish();
             }
         });
 

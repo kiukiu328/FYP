@@ -22,6 +22,8 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
 import com.fyp.evhelper.stream.*
+import com.google.firebase.database.FirebaseDatabase
+import java.lang.Exception
 
 // for other program to go back homepage
 lateinit var animatedBottomBar: AnimatedBottomBar
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             applicationContext.contentResolver,
             Settings.Secure.ANDROID_ID
         )
+
         println("androidID:" + androidID)
         var token = ""
 //        Firebase for getting messaging
@@ -69,7 +72,11 @@ class MainActivity : AppCompatActivity() {
             Log.d("Main token", token)
             GlobalScope.launch {
                 withContext(Dispatchers.IO) {
-                    sendToken(androidID, token)
+                    try {
+                        sendToken(androidID, token)
+                    } catch (e: Exception) {
+
+                    }
                 }
             }
         })

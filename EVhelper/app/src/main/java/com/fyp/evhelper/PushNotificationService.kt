@@ -1,6 +1,7 @@
 package com.fyp.evhelper
 
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -23,8 +24,6 @@ class PushNotificationService : FirebaseMessagingService() {
     }
 
 
-
-
     override fun onNewToken(p0: String) {
         Log.d(TAG, "Refreshed token: $p0")
         GlobalScope.launch {
@@ -44,7 +43,7 @@ class PushNotificationService : FirebaseMessagingService() {
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
-
+            Toast.makeText(applicationContext,"Detects uniformed personnel", Toast.LENGTH_LONG)
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.
 //                scheduleJob()

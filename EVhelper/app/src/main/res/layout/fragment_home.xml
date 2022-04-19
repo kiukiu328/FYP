@@ -10,11 +10,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hardware Status"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_margin="20dp"
+            android:layout_marginVertical="20dp"
+
             app:cardCornerRadius="20dp">
 
 
@@ -22,36 +32,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
-                    android:layout_margin="20dp"
                     android:id="@+id/tvCarData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Loading..."/>
+                    android:layout_margin="20dp"
+                    android:text="Loading..." />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="150dp"-->
-<!--            android:layout_margin="20dp"-->
-<!--            app:cardCornerRadius="20dp">-->
 
-<!--            <ImageView-->
-<!--                android:layout_width="120dp"-->
-<!--                android:layout_height="120dp"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:background="@color/white" />-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="150dp"-->
+        <!--            android:layout_margin="20dp"-->
+        <!--            app:cardCornerRadius="20dp">-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="150dp"-->
-<!--                android:layout_marginTop="50dp"-->
-<!--                android:text="Click to view stream"-->
-<!--                android:textSize="20dp"></TextView>-->
-<!--        </androidx.cardview.widget.CardView>-->
+        <!--            <ImageView-->
+        <!--                android:layout_width="120dp"-->
+        <!--                android:layout_height="120dp"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginTop="20dp"-->
+        <!--                android:background="@color/white" />-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginLeft="150dp"-->
+        <!--                android:layout_marginTop="50dp"-->
+        <!--                android:text="Click to view stream"-->
+        <!--                android:textSize="20dp"></TextView>-->
+        <!--        </androidx.cardview.widget.CardView>-->
         <!--        <androidx.cardview.widget.CardView-->
         <!--            android:layout_width="match_parent"-->
         <!--            android:layout_height="150dp"-->
@@ -78,16 +94,67 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="please click on the map to activate the nearest table"/>
-        <LinearLayout
-            android:id="@+id/top10List"
+            android:gravity="center"
+            android:text="please click on the map to activate the nearest table" />
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/top10List"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:orientation="vertical">-->
+
+
+        <!--        </LinearLayout>-->
+        <ScrollView
+            android:id="@+id/svTable"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginHorizontal="20dp">
+
+            <TableLayout
+                android:id="@+id/top10List"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1"></TableLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/tvExtendTable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="See more..."
+            android:textAlignment="center"
+            android:visibility="invisible"></TextView>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
 
-        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:gravity="center"
+            android:text="EV Maintenance"
+            android:textSize="20dp" />
 
+        <ListView
+            android:id="@+id/lvMaintenance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:gravity="center"
+            android:text="Booking"
+            android:textSize="20dp" />
 
     </LinearLayout>
 

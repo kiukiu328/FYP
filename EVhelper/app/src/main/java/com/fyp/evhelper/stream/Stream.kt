@@ -32,7 +32,7 @@ class Stream : Fragment() {
             ref.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     ip_address = dataSnapshot.value.toString()
-                    saveAddress(ip_address)
+//                    saveAddress(ip_address)
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
