@@ -232,7 +232,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="40dp"
-                            android:text="Detect Timer\n(10-40)"
+                            android:text="Detect Timer\n(Seconds)"
                             android:textAlignment="center"
                             android:textSize="20sp" />
                     </LinearLayout>
@@ -265,7 +265,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="40dp"
-                            android:text="Preview Picture Timer\n(5-20)"
+                            android:text="Preview Picture Timer\n(Seconds)"
                             android:textAlignment="center"
                             android:textSize="20sp" />
                     </LinearLayout>

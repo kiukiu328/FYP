@@ -125,7 +125,7 @@ def face_detect(image):
                 cv2.rectangle(image, (int(left), int(top)), (int(right), int(bottom)), (0, 0, 255), thickness=2)
 
                 cv2.rectangle(image, (int(left) - 15, int(top) - 8),(int(left) - 15 + text_width, int(top) - 10-text_height), (0, 0, 255), -1)
-                cv2.putText(image, "Danger", (int(left)-15, int(top)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+                cv2.putText(image, "Vigilant", (int(left)-15, int(top)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
                 cv2.putText(image, "score:%.2f"%score, (int(left)+50, int(top)-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0,255 ), 1)
             else:
                 text_size_ = cv2.getTextSize("Normal", cv2.FONT_HERSHEY_SIMPLEX, 0.5, thickness=1)
