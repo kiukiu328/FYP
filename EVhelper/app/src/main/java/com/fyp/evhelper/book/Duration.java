@@ -75,6 +75,7 @@ public class Duration extends AppCompatActivity {
             myRef.child("Booking").child("Client01").child("02").child("book_date").setValue(bookDate);
             myRef.child("Booking").child("Client01").child("02").child("entrance_time").setValue(entranceTime);
             myRef.child("Booking").child("Client01").child("02").child("exit_time").setValue(leaveTime);
+            myRef.child("Booking").child("Client01").child("02").child("name").setValue("Chan Tai Man");
 
             //Create a dialog to show booking successful message
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
