@@ -141,7 +141,7 @@ public class BookHistory extends AppCompatActivity {
                 // the item is added inside the array list and
                 // notifying the adapter that the data in adapter is changed.
                 String listTitle = snapshot.getKey();
-                listTitle += " - " + snapshot.child("car_park").getValue();
+                listTitle += " - " + snapshot.child("car_park").getValue() + " (" + snapshot.child("book_date").getValue() + ")";
                 historyArrayList.add(listTitle);
                 adapter.notifyDataSetChanged();
             }
