@@ -95,6 +95,16 @@ public class BookHistory extends AppCompatActivity {
                                             //Exception
                                         }
                                     }
+                                })
+                            
+                                .setNegativeButton("Delete History", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        clientRef.removeValue();
+                                        Intent intent = new Intent(getApplicationContext(), BookHistory.class);
+
+                                        startActivity(intent);
+                                    }
                                 });
                         // create alert dialog
                         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -118,7 +128,9 @@ public class BookHistory extends AppCompatActivity {
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+                startActivity(intent);
             }
         });
 
