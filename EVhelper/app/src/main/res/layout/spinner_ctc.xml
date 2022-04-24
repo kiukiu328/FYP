@@ -8,6 +8,6 @@
     android:id="@+id/spr_ctcLocation"
     android:textSize="18sp"
     android:textStyle="bold"
-    android:textColor="@color/white"
+    android:textColor="@color/spr_bg_yellow"
     />
 </LinearLayout>
