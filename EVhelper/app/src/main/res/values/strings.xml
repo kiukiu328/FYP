@@ -17,47 +17,47 @@
     <string name="humidity">Humidity</string>
     <string name="SetLanguage">Set Language</string>
     <string-array name="CentreArea">
-        <item><font color="white"><b>HongKongIsland</b></font></item>
-        <item><font color="white"><b>Kowloon</b></font></item>
-        <item><font color="white"><b>NewTerritories</b></font></item>
+        <item><font color="#FCC300"><b>HongKongIsland</b></font></item>
+        <item><font color="#FCC300"><b>Kowloon</b></font></item>
+        <item><font color="#FCC300"><b>NewTerritories</b></font></item>
     </string-array>
     <string-array name="HongKongIslandDistrict">
-        <item><font color="white"><b>Ap Lei Chau</b></font></item>
-        <item><font color="white"><b>Chai Wan</b></font></item>
-        <item><font color="white"><b>North Point</b></font></item>
-        <item><font color="white"><b>Quarry Bay</b></font></item>
+        <item><font color="#FCC300"><b>Ap Lei Chau</b></font></item>
+        <item><font color="#FCC300"><b>Chai Wan</b></font></item>
+        <item><font color="#FCC300"><b>North Point</b></font></item>
+        <item><font color="#FCC300"><b>Quarry Bay</b></font></item>
     </string-array>
     <string-array name="KowloonDistrict">
-        <item><font color="white"><b>Cheung Sha Wan</b></font></item>
-        <item><font color="white"><b>Hung Hom</b></font></item>
-        <item><font color="white"><b>Kowloon Bay</b></font></item>
-        <item><font color="white"><b>Kwun Tong</b></font></item>
-        <item><font color="white"><b>To Kwa Wan</b></font></item>
+        <item><font color="#FCC300"><b>Cheung Sha Wan</b></font></item>
+        <item><font color="#FCC300"><b>Hung Hom</b></font></item>
+        <item><font color="#FCC300"><b>Kowloon Bay</b></font></item>
+        <item><font color="#FCC300"><b>Kwun Tong</b></font></item>
+        <item><font color="#FCC300"><b>To Kwa Wan</b></font></item>
     </string-array>
     <string-array name="NewTerritoriesDistrict">
-        <item><font color="white"><b>Fanling</b></font></item>
-        <item><font color="white"><b>Kwai Chung</b></font></item>
-        <item><font color="white"><b>Shatin</b></font></item>
-        <item><font color="white"><b>Sheung Shui</b></font></item>
-        <item><font color="white"><b>Tuen Mun</b></font></item>
-        <item><font color="white"><b>Tsuen Wan</b></font></item>
-        <item><font color="white"><b>Yuen Long</b></font></item>
+        <item><font color="#FCC300"><b>Fanling</b></font></item>
+        <item><font color="#FCC300"><b>Kwai Chung</b></font></item>
+        <item><font color="#FCC300"><b>Shatin</b></font></item>
+        <item><font color="#FCC300"><b>Sheung Shui</b></font></item>
+        <item><font color="#FCC300"><b>Tuen Mun</b></font></item>
+        <item><font color="#FCC300"><b>Tsuen Wan</b></font></item>
+        <item><font color="#FCC300"><b>Yuen Long</b></font></item>
     </string-array>
     <string-array name="ElectricVehicleService">
-        <item><font color="white"><b>Air Filter</b></font></item>
-        <item><font color="white"><b>Battery</b></font></item>
-        <item><font color="white"><b>Brake System</b></font></item>
-        <item><font color="white"><b>Car Beauty</b></font></item>
-        <item><font color="white"><b>Coolant</b></font></item>
-        <item><font color="white"><b>Four-Wheel Alignment(include tire)</b></font></item>
-        <item><font color="white"><b>Restraint System(airbags)</b></font></item>
-        <item><font color="white"><b>Annual Checking</b></font></item>
-        <item><font color="white"><b>Others</b></font></item>
+        <item><font color="#FCC300"><b>Air Filter</b></font></item>
+        <item><font color="#FCC300"><b>Battery</b></font></item>
+        <item><font color="#FCC300"><b>Brake System</b></font></item>
+        <item><font color="#FCC300"><b>Car Beauty</b></font></item>
+        <item><font color="#FCC300"><b>Coolant</b></font></item>
+        <item><font color="#FCC300"><b>Four-Wheel Alignment(include tire)</b></font></item>
+        <item><font color="#FCC300"><b>Restraint System(airbags)</b></font></item>
+        <item><font color="#FCC300"><b>Annual Checking</b></font></item>
+        <item><font color="#FCC300"><b>Others</b></font></item>
     </string-array>
     <string-array name="ElectricVehicleYear">
-        <item><font color="white"><b>Six months</b></font></item>
-        <item><font color="white"><b>One year</b></font></item>
-        <item><font color="white"><b>Two-year</b></font></item>
-        <item><font color="white"><b>Four-year</b></font></item>
+        <item><font color="#FCC300"><b>Six months</b></font></item>
+        <item><font color="#FCC300"><b>One year</b></font></item>
+        <item><font color="#FCC300"><b>Two-year</b></font></item>
+        <item><font color="#FCC300"><b>Four-year</b></font></item>
     </string-array>
 </resources>
