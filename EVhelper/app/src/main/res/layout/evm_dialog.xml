@@ -15,7 +15,7 @@
             android:layout_height="280dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/evm_dia_bg">
+            android:background="@drawable/bg_iconcolor">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
@@ -27,7 +27,7 @@
             android:background="@color/noColor"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:text="Google Calender"
+            android:text="Sync Google Calender"
             android:textSize="20dp"
             android:id="@+id/evm_dia_cal"
             android:layout_weight="1"
