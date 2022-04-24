@@ -98,6 +98,14 @@
                                 android:background="@color/light_gray"
                                 android:padding="10dp">
 
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/tempBackground"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_alignParentEnd="true"
+                                    app:cardBackgroundColor="@color/green"
+                                    app:cardCornerRadius="10dp" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -126,7 +134,7 @@
                                     android:layout_marginBottom="15dp"
                                     android:layout_toEndOf="@id/temperatureIcon"
                                     android:text="@string/Loading"
-                                    android:textSize="12sp" />
+                                    android:textSize="15sp" />
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -135,6 +143,15 @@
                                 android:layout_margin="10dp"
                                 android:background="@color/light_gray"
                                 android:padding="10dp">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/voltBackground"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_alignParentEnd="true"
+                                    app:cardBackgroundColor="@color/green"
+                                    app:cardCornerRadius="10dp" />
+
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -164,7 +181,7 @@
                                     android:layout_marginBottom="15dp"
                                     android:layout_toEndOf="@id/voltageIcon"
                                     android:text="@string/Loading"
-                                    android:textSize="12sp" />
+                                    android:textSize="15sp" />
                             </RelativeLayout>
                         </LinearLayout>
 
@@ -179,6 +196,14 @@
                                 android:layout_margin="10dp"
                                 android:background="@color/light_gray"
                                 android:padding="10dp">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/pressureBackground"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_alignParentEnd="true"
+                                    app:cardBackgroundColor="@color/green"
+                                    app:cardCornerRadius="10dp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -208,7 +233,7 @@
                                     android:layout_marginBottom="15dp"
                                     android:layout_toEndOf="@id/pressureIcon"
                                     android:text="@string/Loading"
-                                    android:textSize="12sp" />
+                                    android:textSize="15sp" />
                             </RelativeLayout>
 
 
@@ -218,6 +243,14 @@
                                 android:layout_margin="10dp"
                                 android:background="@color/light_gray"
                                 android:padding="10dp">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/humidityBackground"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_alignParentEnd="true"
+                                    app:cardBackgroundColor="@color/green"
+                                    app:cardCornerRadius="10dp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -247,7 +280,7 @@
                                     android:layout_marginBottom="15dp"
                                     android:layout_toEndOf="@id/humidityIcon"
                                     android:text="@string/Loading"
-                                    android:textSize="12sp" />
+                                    android:textSize="15sp" />
                             </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>

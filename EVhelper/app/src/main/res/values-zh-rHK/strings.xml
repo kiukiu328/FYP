@@ -4,12 +4,17 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_notification_channel_id">fcm_default_channel</string>
     <string name="title_activity_settings">SettingsActivity</string>
-    <string name="HardwareStatus">Hardware Status</string>
-    <string name="Loading">Loading&#8230; &#8230;</string>
-    <string name="NearestChargingStation">Nearest charging station</string>
-    <string name="tableActivateHint">please click on the map to activate the nearest table</string>
-    <string name="seeMore">See more&#8230;</string>
-    <string name="seeLess">See less&#8230;</string>
-    <string name="EVMaintenance">EV Maintenance</string>
-    <string name="Booking">Booking</string>
+    <string name="HardwareStatus">硬件狀態</string>
+    <string name="Loading">加載中&#8230;</string>
+    <string name="NearestChargingStation">最近的充電站</string>
+    <string name="tableActivateHint">請點擊地圖激活最近列表</string>
+    <string name="seeMore">更多&#8230;</string>
+    <string name="seeLess">較少&#8230;</string>
+    <string name="EVMaintenance">電動汽車維修</string>
+    <string name="Booking">預訂</string>
+    <string name="temperature">溫度</string>
+    <string name="pressure">氣壓</string>
+    <string name="voltage">電壓</string>
+    <string name="humidity">濕度</string>
+    <string name="SetLanguage">Set Language</string>
 </resources>

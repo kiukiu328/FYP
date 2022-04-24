@@ -1,13 +1,17 @@
 package com.fyp.evhelper
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.fyp.evhelper.reminder.ReminderMainPage
+import com.fyp.evhelper.stream.*
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
@@ -21,20 +25,20 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
-import com.fyp.evhelper.stream.*
-import com.google.firebase.database.FirebaseDatabase
-import java.lang.Exception
+import java.util.*
 
 // for other program to go back homepage
 lateinit var animatedBottomBar: AnimatedBottomBar
 
 class MainActivity : AppCompatActivity() {
+
     private val TAG = MainActivity::class.java.simpleName
     lateinit var fManager: FragmentManager
     lateinit var homeFragment: Fragment
     lateinit var mapFragment: Fragment
     lateinit var streamFragment: Fragment
     lateinit var reminderFragment: Fragment
+    lateinit var settingFragment: Fragment
 
     //    set the companion object for other program to get the public
     companion object {
@@ -92,6 +96,7 @@ class MainActivity : AppCompatActivity() {
         mapFragment = Map()
         streamFragment = Stream()
         reminderFragment = ReminderMainPage()
+        settingFragment = Setting()
         fManager!!.beginTransaction().replace(R.id.fragment_container, homeFragment)
             .commit()
 // set the navigation bar
@@ -108,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.map -> fragment = mapFragment
                     R.id.stream -> fragment = streamFragment
                     R.id.reminder -> fragment = reminderFragment
-//                    R.id.setting -> fragment = SettingFragment()
+                    R.id.setting -> fragment = settingFragment
 
                 }
                 if (fragment != null) {
@@ -155,4 +160,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+//    override fun attachBaseContext(newBase: Context?) {
+//        Log.d(null,"attachBaseContext")
+//        var newLocale: Locale = Locale("zh")
+//        // .. create or get your new Locale object here.
+//        val configuration = Configuration()
+//        configuration.locale = newLocale
+//        (baseContext as ContextThemeWrapper).applyOverrideConfiguration(configuration)
+//        val context: Context = ContextWrapper.wrap(newBase!!, newLocale)
+//        super.attachBaseContext(context)
+//    }
 }

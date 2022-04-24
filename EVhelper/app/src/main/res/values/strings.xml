@@ -4,9 +4,9 @@
     <string name="default_notification_channel_id">fcm_default_channel</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="HardwareStatus">Hardware Status</string>
-    <string name="Loading">Loading&#8230; &#8230;</string>
+    <string name="Loading">Loading&#8230;</string>
     <string name="NearestChargingStation">Nearest charging station</string>
-    <string name="tableActivateHint">please click on the map to activate the nearest table</string>
+    <string name="tableActivateHint">Please click on the map to activate the nearest table</string>
     <string name="seeMore">See more&#8230;</string>
     <string name="seeLess">See less&#8230;</string>
     <string name="EVMaintenance">EV Maintenance</string>
@@ -15,6 +15,7 @@
     <string name="pressure">Pressure</string>
     <string name="voltage">Voltage</string>
     <string name="humidity">Humidity</string>
+    <string name="SetLanguage">Set Language</string>
     <string-array name="CentreArea">
         <item><font color="white"><b>HongKongIsland</b></font></item>
         <item><font color="white"><b>Kowloon</b></font></item>

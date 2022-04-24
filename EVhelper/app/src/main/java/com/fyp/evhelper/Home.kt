@@ -1,5 +1,6 @@
 package com.fyp.evhelper
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -158,29 +159,22 @@ class Home : Fragment() {
 
         GlobalScope.launch {
             withContext(Dispatchers.IO) {
+                val textSize = 20f
 //                when the view is running load the data
                 while (!viewDestroy) {
                     try {
                         apiResponse = URL("http://192.168.1.107/").readText()
                         jObj = JSONObject(apiResponse)
                         (context as Activity).runOnUiThread {
+                            tempValue.textSize = textSize
+                            pressureValue.textSize = textSize
+                            humidityValue.textSize = textSize
+                            voltValue.textSize = textSize
                             tempValue.text = "${jObj.getString("temperature")}°C"
                             pressureValue.text = "%.0f Pa".format(jObj.getDouble("pressure"))
-                            tempValue.text =
-                                "%.0f%".format(jObj.getDouble("humidity"))
-                            tempValue.text = "${jObj.getString("voltage")}v"
-//                            "${getEmojiByUnicode(0x1F321)}  Temperature:  ${jObj.getString("temperature")} \n" +
-//                                    "${getEmojiByUnicode(0x1F4A8)}  Pressure : %.2f \n".format(
-//                                        jObj.getDouble("pressure")
-//                                    ) +
-//                                    "${getEmojiByUnicode(0x1F4A6)}   Humidity :  %.2f\n".format(
-//                                        jObj.getDouble("humidity")
-//                                    ) +
-//                                    "${getEmojiByUnicode(0x26A1)}   Voltage :  ${
-//                                        jObj.getString(
-//                                            "voltage"
-//                                        )
-//                                    }  \n"
+                            humidityValue.text =
+                                "%.0f%%".format(jObj.getDouble("humidity"))
+                            voltValue.text = "${jObj.getString("voltage")}v"
                         }
 
                     } catch (e: Exception) {
@@ -258,9 +252,9 @@ class Home : Fragment() {
     }
 
     private fun setMaintenance(v: View, lv: ListView) {
-        var db: SQLiteDatabase
-        var cursor: Cursor
-        var evCycleList: ArrayList<HashMap<String, String>> = ArrayList()
+        val db: SQLiteDatabase
+        val cursor: Cursor
+        val evCycleList: ArrayList<HashMap<String, String>> = ArrayList()
 
         try {
             db = SQLiteDatabase.openDatabase(
