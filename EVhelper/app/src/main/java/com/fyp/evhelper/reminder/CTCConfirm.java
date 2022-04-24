@@ -135,10 +135,12 @@ public class CTCConfirm extends AppCompatActivity implements AdapterView.OnItemS
                 txt_workingHours.setText(workingHours);
                 btn_googleCalender.setVisibility(View.VISIBLE);
                 btn_modifyData.setVisibility(View.VISIBLE);
+                edit_ctcDate.setEnabled(false);
+                edit_ctcTime.setEnabled(false);
                 correct_sound.start();
                 try {
                     // save the data to db \\
-                    db = SQLiteDatabase.openDatabase("/data/data/com.example.v12_1/LicenceDB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
+                    db = SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper/LicenceDB", null, SQLiteDatabase.CREATE_IF_NECESSARY);
                     sql = "CREATE TABLE IF NOT EXISTS DCTC(ctcNo INTEGER PRIMARY KEY AUTOINCREMENT, ctcDate date, ctcTime text, ctcName text, ctcLocation text, ctcTel text,ctcWorkingHours text);";
                     db.execSQL(sql);
                     String row = "INSERT INTO DCTC(ctcDate,ctcTime,ctcName,ctcLocation,ctcTel,ctcWorkingHours) Values ('" + ctcDate + "','" + ctcTime + "','" + name + "','" + location + "','" + tel + "','" + workingHours + "')";
@@ -176,11 +178,13 @@ public class CTCConfirm extends AppCompatActivity implements AdapterView.OnItemS
             @Override
             public void onClick(View v) {
                 //ctcShow.setVisibility(View.GONE);
+                edit_ctcDate.setEnabled(true);
+                edit_ctcTime.setEnabled(true);
                 btn_googleCalender.setVisibility(View.GONE);
                 btn_modifyData.setVisibility(View.GONE);
                 btn_createCTC.setVisibility(View.VISIBLE);
                 ctcShow2.setVisibility(View.VISIBLE);
-                db= SQLiteDatabase.openDatabase("/data/data/com.example.v12_1/LicenceDB", null ,SQLiteDatabase.CREATE_IF_NECESSARY);
+                db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper/LicenceDB", null ,SQLiteDatabase.CREATE_IF_NECESSARY);
                 sql = "DROP TABLE IF EXISTS DCTC;";
                 db.execSQL(sql);
                 click_sound.start();
@@ -443,8 +447,10 @@ public class CTCConfirm extends AppCompatActivity implements AdapterView.OnItemS
     @SuppressLint("Range")
     public void readData(){
         try {
-            db= SQLiteDatabase.openDatabase("/data/data/com.example.v12_1/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
+            db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
             cursor= db.rawQuery("SELECT * FROM DCTC WHERE ctcNo = 1" , null);
+            edit_ctcDate.setEnabled(false);
+            edit_ctcTime.setEnabled(false);
             ctcShow2.setVisibility(View.GONE);
             btn_createCTC.setVisibility(View.GONE);
             ctcShow.setVisibility(View.VISIBLE);
