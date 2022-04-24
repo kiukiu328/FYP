@@ -8,9 +8,10 @@
     >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:orientation="horizontal"
-        android:background="@drawable/bg_iconcolor">
+        android:background="@drawable/bg_iconcolor"
+        android:padding="5dp">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
