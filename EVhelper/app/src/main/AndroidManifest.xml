@@ -54,10 +54,10 @@
             android:exported="false" />
         <activity
             android:name="com.fyp.evhelper.reminder.DriLicAddData"
-            android:exported="false" />
+             />
         <activity
             android:name="com.fyp.evhelper.reminder.VehLicAddData"
-            android:exported="false" />
+            />
 
 
         <meta-data
