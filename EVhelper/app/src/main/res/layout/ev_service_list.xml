@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/cust_lv_color">
+        android:background="@drawable/bg_iconcolor">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
