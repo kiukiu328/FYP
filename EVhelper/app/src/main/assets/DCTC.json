@@ -1,0 +1,265 @@
+{
+	"HongKongIsland": {
+		"District": {
+			"Ap Lei Chau": [{
+				"name": "Dah Chong Hong (Motor Service Centre) Ltd.",
+				"location": "G/F, DCH Motor Service Building, 111 Lee Nam Road, Ap Lei Chau, Hong Kong",
+				"tel": "28086614",
+				"workingHours": "Monday - Friday: 08:30 - 19:00 \nSaturday: 08:30 - 17:30 \nSunday & Public Holiday Closed "
+			},
+				{
+					"name": "Elite Motors",
+					"location": "Unit 3, G/F.,Oceanic Industrial Centre, 2 Lee Lok Street, Ap Lei Chau, Hong Kong",
+					"tel": "27110988",
+					"workingHours": "Monday - Saturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				}
+			],
+			"Chai Wan": [{
+				"name": "Universal Cars Ltd.",
+				"location": "2/F, Kailey Industrial Centre, 12 Fung Yip Street, Chai Wan, Hong Kong",
+				"tel": "39138266",
+				"workingHours": "Monday - Friday: 09:00 - 19:00 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+			},
+				{
+					"name": "Zung Fu Company Ltd.",
+					"location": "Zung Fu House, 60 Ka Yip Street, Chai Wan, Hong Kong",
+					"tel": "28957323",
+					"workingHours": "Monday - Friday: 08:30 - 18:00 \nSaturday: Closed \nSunday & Public Holiday Closed "
+				}
+			],
+			"North Point": [{
+				"name": "Crown Motors Ltd.",
+				"location": "Block B, G/F, Seaview Estate, 2-8 Watson Road, North Point, Hong Kong",
+				"tel": "28801525",
+				"workingHours": "Monday - Friday: 08:30 - 18:00 \nSaturday: 08:30 - 18:00 \nSunday & Public Holiday Closed "
+			}],
+			"Quarry Bay": [{
+				"name": "Dah Chong Hong (Motor Service Centre) Ltd.",
+				"location": "Unit B, G/F, Cheung Wah Industrial Building, Nos. 10-12 Shipyard Lane, Quarry Bay, Hong Kong",
+				"tel": "25629846",
+				"workingHours": "Monday - Friday: 08:30 - 19:00 \nSaturday: 08:30 - 17:30 \nSunday & Public Holiday Closed "
+			}]
+		}
+	},
+	"Kowloon": {
+		"District": {
+			"Cheung Sha Wan": [{
+				"name": "Motormech Service Station Ltd.",
+				"location": "G/F, Tong Yuen Factory Building, 505 Castle Peak Road, Cheung Sha Wan, Kowloon",
+				"tel": "24111911",
+				"workingHours": "Monday - Friday: 09:00 - 18:00 \nSaturday: 09:00 - 17:00 \nSunday & Public Holiday Closed "
+			}],
+			"Hung Hom": [{
+				"name": "Jebsen Motors Ltd.",
+				"location": "Unit 1, G/F, Tower 2, Harbour Centre, 8 Hok Cheung Street, Hung Hom, Kowloon",
+				"tel": "21797951",
+				"workingHours": "Monday - Friday: 08:30 - 18:00 \nSaturday Closed \nSunday & Public Holiday Closed "
+			},
+				{
+					"name": "Zung Fu Company Ltd.",
+					"location": "G/F, Zung Fu Car Park Building, 50 Po Loi Street, Hung Hom, Kowloon",
+					"tel": "23639396",
+					"workingHours": "Monday - Friday: 08:30 - 18:00 \nSaturday Closed \nSunday & Public Holiday Closed "
+				}
+			],
+			"Kowloon Bay": [{
+				"name": "Crown Motors Ltd.",
+				"location": "G/F, Jing Hin Industrial Building, 5 Wang Kee Street, Kowloon Bay, Kowloon",
+				"tel": "28255297",
+				"workingHours": "Monday - Saturday: 08:30 - 17:30 \nSunday: & Public Holiday Closed "
+			},
+				{
+					"name": "Dah Chong Hong (Motor Service Centre) Ltd.",
+					"location": "2/F, 20 Kai Cheung Road, Kowloon Bay, Kowloon",
+					"tel": "27682941",
+					"workingHours": "Monday - Friday: 08:30 - 17:30 \nSaturday: 08:30 - 17:30 \nSunday & Public Holiday Closed "
+				},
+				{
+					"name": "German Motor Technology Service Centre",
+					"location": "Unit No. 8 - 9, Ground Floor, Po Lung Centre, No. 11 Wang Chiu Road, Kowloon Bay, Kowloon",
+					"tel": "21110027",
+					"workingHours": "Monday - Friday: 09:00 - 18:30 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				},
+				{
+					"name": "KBIA Motor Services Centre Limited",
+					"location": "Flat /Rm 2 - 5, G/F, Sino Industrial Plaza, 9 Kai Cheung Road, Kowloon Bay, Kowloon",
+					"tel": "29222928",
+					"workingHours": "Monday - Friday: 09:00 - 18:30 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				}
+			],
+			"Kwun Tong": [{
+				"name": "Cars Restoration (Hong Kong) Limited",
+				"location": "G/F, 16 - 18 Hing Yip St, Kwun Tong, Kowloon",
+				"tel": "23452810",
+				"workingHours": "Monday - Friday: 08:30 - 18:30 \nSaturday: 08:30 - 17:30 \nSunday & Public Holiday Closed "
+			}],
+
+
+			"To Kwa Wan": [{
+				"name": "Sangyong (Hong Kong) Limited",
+				"location": "Ground Floor, 9 Mok Cheong Street, To Kwa Wan, Kowloon",
+				"tel": "27115165",
+				"workingHours": "Monday - Friday: 09:30 - 18:30 \nSaturday: 10:00 - 18:00 \nSunday & Public Holiday Closed "
+			},
+				{
+					"name": "Sime Darby Motor Services Limited",
+					"location": "Unit A, G/F, Cheong Wah Factory Bldg, 39-41 Sheung Heung Road, To Kwa Wan, Kowloon",
+					"tel": "39138211",
+					"workingHours": "Monday - Friday: 09:00 - 19:00 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				}
+
+			]
+		}
+	},
+	"NewTerritories": {
+		"District": {
+			"Fanling": [{
+				"name": "Auto Force Motor Services",
+				"location": "G/F, Yau Cheong Centre, 15 On Kui Street, Fanling, N.T",
+				"tel": "21552793",
+				"workingHours": "Monday - Friday: 10:00 - 19:00 \nSaturday: 10:00 - 18:00 \nSunday & Public Holiday Closed "
+			},
+				{
+					"name": "Ocean Express Motor Works Factory",
+					"location": "DD 77 LOT 566-568 Ping Che Road, Fanling, N.T",
+					"tel": "26744454",
+					"workingHours": "Monday - Saturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				}
+			],
+			"Kwai Chung": [{
+				"name": "Crown Motors Ltd.",
+				"location": "G/F, Mita Centre, 552 - 566 Castle Peak Road, Kwai Chung, N.T",
+				"tel": "28804913",
+				"workingHours": "Monday - Saturday: 08:30 - 18:00 \nSunday & Public Holiday Closed "
+			},
+				{
+					"name": "IPMC Best Solution Limited",
+					"location": "Flat/Rm B, G/F, Grand Industrial Building, 159 - 165 Wo Yi Hop Road, Kwai Chung, NT",
+					"tel": "31881018",
+					"workingHours": "Monday - Saturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				},
+				{
+					"name": "Vang Iek Motors (Hong Kong) Limited",
+					"location": "LG/F, Wah Wing Industrial Building, 14 - 20 Wing Yip Street, Kwai Chung, N.T",
+					"tel": "37684998",
+					"workingHours": "Monday - Saturday: 08:30 - 18:00 \nSunday & Public Holiday Closed"
+				},
+				{
+					"name": "Yau Wing Motors Co",
+					"location": "Unit 2, G/F, Vanta Industrial Centre, 21 - 33 Tai Lin Pai Rd, Kwai Chung, NT",
+					"tel": "24261188",
+					"workingHours": "Monday-Friday: 09:15 - 18:45 \nSaturday: 09:15 - 18:00 \nSunday & Public Holiday Closed"
+				}
+			],
+			"Shatin": [{
+				"name": "Crown Motors Ltd.",
+				"location": "2/F, Topsail Plaza, 11 On Sum Street, Shatin, N.T",
+				"tel": "28255228",
+				"workingHours": "Monday - Saturday: 08:30 - 18:00 \nSunday & Public Holiday Closed "
+			},
+				{
+					"name": "GWM Services Limited",
+					"location": "Flat 4 G/F Wah Wai Centre, 38 - 40 Au Pui Wan Street, Fo Tan, Shatin, N.T",
+					"tel": "28689999",
+					"workingHours": "Monday - Friday: 09:00 - 19:00 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				},
+				{
+					"name": "Universal Cars Ltd",
+					"location": "3/F, Topsail Plaza, 11 On Sum Street, Shatin, N.T",
+					"tel": "39138611",
+					"workingHours": "Monday-Friday: 09:00 - 18:30 \nSaturday: 09:00 - 18:00"
+				},
+				{
+					"name": "Simple Motors Limited",
+					"location": "Flat / Rm 2, 1/F, Wah Wai Centre, Nos. 38 - 40 Au Pui Wan Street, Fo Tan, Shatin, N.T",
+					"tel": "25271577",
+					"workingHours": "Monday - Friday: 09:00 - 18:30 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				}
+			],
+			"Sheung Shui": [{
+				"name": "Fastwheel Automotive Service Limited",
+				"location": "Block A, 1/F, Sheung Shui Plaza, 3 Ka Fu Close, Sheung Shui, N.T",
+				"tel": "21619711",
+				"workingHours": "Monday - Saturday: 08:45 - 18:00 \nSunday & Public Holiday Closed "
+			}],
+			"Tuen Mun": [{
+				"name": "Action Motor Limited",
+				"location": "Room C, G/F, Winfield Industrial Building, 3 Kin Kwan Street, Tuen Mun, N.T",
+				"tel": "36924340",
+				"workingHours": "Monday - Friday: 08:30 - 19:00 \nSaturday: 08:30 - 18:00 \nSunday & Public Holiday Closed "
+			},
+				{
+					"name": "Ankor Motors Limited",
+					"location": "Blk A, G/F, Man Sun Logistics Centre, 3B Hung Cheung Rd, Tuen Mun, N.T",
+					"tel": "27113898",
+					"workingHours": "Monday - Friday: 08:30 - 18:30 \nSaturday: 08:30 - 18:00 \nSunday & Public Holiday Closed "
+				}
+			],
+			"Tsuen Wan": [{
+				"name": "Crown Motors Ltd.",
+				"location": "G/F, Excelsior Building, 68 Sha Tsui Road, Tsuen Wan, N.T",
+				"tel": "28233206",
+				"workingHours": "Monday - Friday: 8:30 - 18:00 \nSaturday: 8:30 - 18:00 \nSunday & Public Holiday Closed "
+			},
+				{
+					"name": "Kam Lung Motor Group Limited ",
+					"location": "G/F, 53 - 57 Chai Wan Kok Street, Tsuen Wan, N.T",
+					"tel": "21194899",
+					"workingHours": "Monday - Friday: 09:00 - 18:30 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				},
+				{
+					"name": "MMS Motor Testing Centre Limited",
+					"location": "Flat 20, G/F, Po Yip Building, 62 - 70 Texaco Road, Tsuen Wan, N.T",
+					"tel": "21807434",
+					"workingHours": "Monday - Friday: 09:00 - 19:00 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				},
+
+				{
+					"name": "Power Moto",
+					"location": "2/F, Jing Ho Industrial Building, 78 - 84 Wang Lung St, Tsuen Wan, N.T",
+					"tel": "21112260",
+					"workingHours": "Monday - Friday: 09:00 - 19:00 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				}
+			],
+			"Yuen Long": [{
+				"name": "China Inspection Co Ltd",
+				"location": "50 Fuk Hi Street, Industrial Estate, Yuen Long, N.T",
+				"tel": "24866802",
+				"workingHours": "Monday - Saturday: 09:00 - 18:00 \nSunday & Public Holiday Closed"
+			},
+				{
+					"name": "Crown Motors Ltd.",
+					"location": "Lot 410, DD 127, Kiu Tau Wai, Ping Shan, Yuen Long, N.T",
+					"tel": "28804466",
+					"workingHours": "Monday - Saturday: 8:30 - 18:00 \nSunday & Public Holiday Closed "
+				},
+				{
+					"name": "Dah Chong Hong (Motor Service Centre) Ltd. ",
+					"location": "G/F, DCH Kiu Tau Wai Motor Centre, 30 Kiu Wong Street, Kiu Tau Wai, Ping Shan, Yuen Long, N.T",
+					"tel": "24790111",
+					"workingHours": "Monday - Friday: 08:30 - 19:00 \nSaturday: 08:30 - 17:30 \nSunday & Public Holiday Closed "
+				},
+				{
+					"name": "Kings Motor Service Centre",
+					"location": "Flat/Rm 1, G/F, Kar Wah Industrial Building, Nos. 7-11A Hi Yip Street, Yuen Long, N.T",
+					"tel": "24363868",
+					"workingHours": "Monday - Friday: 09:00 - 18:30 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				},
+				{
+					"name": "M D Motors CTC-HK Limited",
+					"location": "Unit 5B, G/F, Mansfield Industrial Centre, 19 Hong Yip Street, Yuen Long, N.T",
+					"tel": "35946183",
+					"workingHours": "Monday - Friday: 09:00 - 18:30 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed "
+				},
+				{
+					"name": "Wallace Harper Co. Ltd",
+					"location": "Unit 6, G/F, Mansfield Industrial Centre, 19 Hong Yip Street, YLTL 406, Wang Chau, Yuen Long, N.T",
+					"tel": "39138288",
+					"workingHours": "Monday - Friday: 08:30 - 19:00 \nSaturday: 09:00 - 18:00 \nSunday & Public Holiday Closed"
+				}
+			]
+		}
+	}
+
+
+}
