@@ -27,4 +27,6 @@
     <color name="spr_bg_yellow">#FFC300</color>
     <color name="spr_bg_yellow2">#FFC311</color>
     <color name="spr_bg_red2">#ED930000</color>
+    <color name="bg_black">#1F1F1F</color>
+    <color name="bg_blue">#0037FF</color>
 </resources>
