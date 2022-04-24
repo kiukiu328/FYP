@@ -4,20 +4,20 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="yellow_700">#FFE500</color>
+    <color name="yellow_500">#B9FFE500</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-<!--    <color name="blue">#43F3FF</color>-->
     <color name="green">#74FF70</color>
-<!--    <color name="gray">#E0E0E0</color>-->
+    <color name="light_gray">#C1D8D8D8</color>
     <color name="light_blue">#3ad6ef</color>
     <color name="pink">#E85D68</color>
     <color name="light_pink">#FF8C96</color>
     <color name="dark_blue">#39718F</color>
     <color name="grad_1">#c7ffda</color>
     <color name="grad_2">#a3fff1</color>
-<!--    <color name="red">#FF0000</color>-->
+    <color name="yellow_selected">#68FFC300</color>
     <color name="gray">#777777</color>
     <color name="blue">#0048FF</color>
     <color name="red">#ED0000</color>
@@ -29,4 +29,5 @@
     <color name="spr_bg_red2">#ED930000</color>
     <color name="bg_black">#1F1F1F</color>
     <color name="bg_blue">#0037FF</color>
+    <color name="homeListBackgroundColor">#FFFBEF</color>
 </resources>

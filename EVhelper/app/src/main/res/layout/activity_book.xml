@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFC300"
+        android:background="@color/spr_bg_yellow"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -27,8 +27,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="260dp"
-                        android:background="#FFC300"
+                        android:background="@color/spr_bg_yellow"
                         android:scaleType="centerCrop" />
 
                     <TextView
@@ -77,7 +77,7 @@
                         android:gravity="center_horizontal"
                         android:text="Maritime Square"
                         android:textAlignment="center"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
                         android:textSize="30sp" />
 
                     <TextView
@@ -89,7 +89,7 @@
                         android:gravity="center_horizontal"
                         android:text="2022/02/08"
                         android:textAlignment="center"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/white"
                         android:textSize="18sp" />
 
                     <LinearLayout
@@ -108,7 +108,7 @@
                             android:gravity="center_horizontal"
                             android:text=""
                             android:textAlignment="center"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/white"
                             android:textSize="18sp" />
 
                         <TextView
@@ -117,7 +117,7 @@
                             android:gravity="center_horizontal"
                             android:text="Charger Type: "
                             android:textAlignment="center"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/white"
                             android:textSize="18sp" />
 
                         <TextView
@@ -125,7 +125,7 @@
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal"
                             android:text="BS 1363"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/white"
                             android:textSize="18sp" />
 
                     </LinearLayout>
@@ -159,7 +159,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:selectionColor="#00ADB5"
-                        app:selectionLabelColor="#FFFFFF"
+                        app:selectionLabelColor="@color/white"
                         app:todayLabelColor="#00ADB5"
                         app:type="one_day_picker" />
 
