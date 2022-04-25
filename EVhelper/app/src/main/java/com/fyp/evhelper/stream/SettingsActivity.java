@@ -117,8 +117,8 @@ public class SettingsActivity extends AppCompatActivity {
         preferences=this.getSharedPreferences("parameter", Context.MODE_PRIVATE);
         previewTimeValue = preferences.getString("phone_change_time","5");
         detectTimeValue=preferences.getString("detect_time","10");
-        detectTimeTV.setText(detectTimeValue + " second");
-        PreviewPictureTV.setText(previewTimeValue + " second");
+        detectTimeTV.setText(detectTimeValue + " seconds");
+        PreviewPictureTV.setText(previewTimeValue + " seconds");
     }
 
     public void saveParameter(){
