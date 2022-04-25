@@ -194,7 +194,8 @@ public class DriLicAddData extends AppCompatActivity {
                 Uri resultUri = result.getUri();
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),resultUri);
-                    imageCapture.setImageBitmap(bitmap);
+                    imageCapture.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 600, 400, false));
+                    Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, 600, 400, false);
                     getTextFromImage(bitmap);
 
                 } catch (IOException e) {
@@ -242,11 +243,12 @@ public class DriLicAddData extends AppCompatActivity {
                         stringBuilder.append("\nValid to    : \n");
                     }
                     // check the valid date and print it\\
-                    if(i>=3 && i<=7){
-                        if(textBlock.getValue().replaceAll("[a-z]","").replaceAll("[A-Z]","").replace("Valid to","")
-                                .replace(" ","").trim().length() == 10){
-                            driLicDate = textBlock.getValue();
-                            stringBuilder.append(textBlock.getValue()+"\n");
+                    if(i>=3){
+                        validDate = textBlock.getValue().replaceAll("[a-z]","").replaceAll("[A-Z]","").replace("Valid to","").replace(" ","").trim();
+                        if( validDate.length() == 10){
+                            driLicDate = validDate;
+                            //stringBuilder.append(textBlock.getValue()+"\n");
+                            //stringBuilder.append(validDate+"\n");
                         }
                     }
                 }
