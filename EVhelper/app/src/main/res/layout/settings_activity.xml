@@ -78,8 +78,8 @@
                             android:layout_weight="1"
                             android:background="@color/light_pink"
                             android:gravity="center"
-                            android:text="15"
                             android:paddingLeft="40dp"
+                            android:text="15 Seconds"
                             android:textColor="@color/dark_blue"
                             android:textSize="20dp"
 
@@ -133,7 +133,7 @@
                             android:textColor="@color/dark_blue"
                             android:id="@+id/PreviewPictureTV"
                             android:background="@color/light_pink"
-                            android:text="15"
+                            android:text="15 Seconds"
                             android:textSize="20dp"
                             android:paddingLeft="40dp"
                             />
@@ -234,6 +234,7 @@
                             android:layout_marginBottom="40dp"
                             android:text="Detect Timer\n(Seconds)"
                             android:textAlignment="center"
+                            android:textColor="@color/white"
                             android:textSize="20sp" />
                     </LinearLayout>
 
@@ -241,9 +242,10 @@
                         android:id="@+id/detectTime"
                         android:layout_width="wrap_content"
                         android:layout_height="98dp"
-                        android:background="@drawable/text_box_sty"
+                        android:background="@drawable/text_box_sty2"
                         android:descendantFocusability="blocksDescendants"
-                        android:orientation="vertical" />
+                        android:orientation="vertical"
+                        android:theme="@style/Theme.Design.NoActionBar"/>
 
 
                 </LinearLayout>
@@ -267,6 +269,7 @@
                             android:layout_marginBottom="40dp"
                             android:text="Preview Picture Timer\n(Seconds)"
                             android:textAlignment="center"
+                            android:textColor="@color/white"
                             android:textSize="20sp" />
                     </LinearLayout>
 
@@ -274,9 +277,10 @@
                         android:id="@+id/previewVal"
                         android:layout_width="wrap_content"
                         android:layout_height="98dp"
-                        android:background="@drawable/text_box_sty"
+                        android:background="@drawable/text_box_sty2"
                         android:descendantFocusability="blocksDescendants"
-                        android:orientation="vertical" />
+                        android:orientation="vertical"
+                        android:theme="@style/Theme.Design.NoActionBar" />
 
                 </LinearLayout>
 
@@ -285,12 +289,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/change_btn_gra"
                     android:text="Change"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
