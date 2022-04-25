@@ -1,4 +1,5 @@
-from flask import Flask, request
+import cv2
+from flask import Flask, request, send_file
 import mysql.connector
 import geopy.distance
 import AlertPolice
@@ -88,6 +89,12 @@ def sendToken():
     print(cursor.rowcount, "record UPDATE.")
     return f'id: {id}  || token: {token}'
 
+@app.route('/camera')
+def camera():
+    global vid
+    r, image = vid.read()
+    cv2.imwrite('./src/camera.jpg', image)
+    return send_file('./src/camera.jpg')
 
 if __name__ == '__main__':
     app.run(host=GetNetworkAddress.get_WLAN_address())
