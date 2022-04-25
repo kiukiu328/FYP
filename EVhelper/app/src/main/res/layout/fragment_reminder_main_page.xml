@@ -204,7 +204,7 @@
             android:layout_height="match_parent"
             android:text="Drop table ( For TESTing )"
             android:id="@+id/dropTableBtn"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_weight="1"
             android:backgroundTint="@color/black"
             />
