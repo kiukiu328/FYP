@@ -180,7 +180,8 @@ class Home : Fragment() {
                             humidityValue.text =
                                 "%.0f%%".format(jObj.getDouble("humidity"))
                             voltValue.text = "${jObj.getString("voltage")}v"
-
+                            pressureBackground.setCardBackgroundColor(Color.GREEN)
+                            humidityBackground.setCardBackgroundColor(Color.GREEN)
                             if (jObj.getDouble("voltage") > 2)
                                 voltBackground.setCardBackgroundColor(Color.GREEN)
                             else
@@ -204,7 +205,7 @@ class Home : Fragment() {
                 while (!viewDestroy) {
                     if (liveCaptureOn) {
                         try {
-                            imageStream = URL("http://192.168.1.171:5000/camera").openStream()
+                            imageStream = URL("http://192.168.1.148:5000/camera").openStream()
                             image = BitmapFactory.decodeStream(imageStream)
 
                             (context as Activity).runOnUiThread {
