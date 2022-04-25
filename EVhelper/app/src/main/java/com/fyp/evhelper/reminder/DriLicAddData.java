@@ -208,6 +208,7 @@ public class DriLicAddData extends AppCompatActivity {
     //OCR d,d\\
     private void getTextFromImage(Bitmap bitmap){
         driLicDate="";
+        String validDate;
         TextRecognizer recognizer = new TextRecognizer.Builder(this).build();
         if (!recognizer.isOperational()){
             Toast.makeText(DriLicAddData.this,"Error Occurred!!!",Toast.LENGTH_SHORT).show();
