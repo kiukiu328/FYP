@@ -41,18 +41,25 @@ public class VehLicAddData extends AppCompatActivity {
     static {
         System.loadLibrary("NativeImageProcessor");
     }
+
     Button button_capture, button_saveVehLicData, button_back;
     TextView textview_data, textVehSample2;
     //TextView textVehSample1;
     Bitmap bitmap;
     String vehLicNo, vehLicDate, vehClass;
-    ImageView imageVehSample;
+    ImageView imageVehSample,imageCapture;
     AlertDialog.Builder confirm;
     private static final int REQUEST_CAMERA_CODE = 100;
     Intent intent;
     DatabaseReference reference;
     SQLiteDatabase db= null;
     String sql;
+
+    //19-4-2022
+    LinearLayout veh_showDate;
+    EditText edit_vehLicNo, edit_vehClass, edit_vehLicDate;
+    //19-4-2022
+
 
     //search->
     //crop image                        --> a,a
@@ -67,20 +74,51 @@ public class VehLicAddData extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_veh_lic_add_data);
         //String dataNo = getIntent().getStringExtra("dataNo");
         textVehSample2 = findViewById(R.id.textVehSample2);
         //textVehSample1 = findViewById(R.id.textVehSample1);
         imageVehSample = findViewById(R.id.imageVehSample);
+        imageCapture =findViewById(R.id.imageCapture);
         button_back = findViewById(R.id.button_back);
         button_capture = findViewById(R.id.button_capture);
         button_saveVehLicData = findViewById(R.id.button_saveVehLicData);
+
         textview_data = findViewById(R.id.text_data);
         confirm = new AlertDialog.Builder(this);
         //textVehSample1.setText(dataNo);
 
         final MediaPlayer correct_sound = MediaPlayer.create(this,R.raw.ding_sound);
         final MediaPlayer click_sound = MediaPlayer.create(this,R.raw.click_sound);
+
+        //19-04-2022
+        veh_showDate = (LinearLayout) findViewById(R.id.veh_showDate);
+        edit_vehLicNo = findViewById(R.id.edit_vehLicNo);
+        edit_vehClass = findViewById(R.id.edit_vehClass);
+        edit_vehLicDate = findViewById(R.id.edit_vehLicDate);;
+        edit_vehLicDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] result = edit_vehLicDate.getText().toString().split("/");
+                final int year = Integer.parseInt(result[2]);
+                final int month = Integer.parseInt(result[1]);
+                final int day = Integer.parseInt(result[0]);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(VehLicAddData.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        month = month+1;
+                        String date = day+"/"+month+"/"+year;
+                        edit_vehLicDate.setText(date);
+                    }
+                },year,month,day);
+                datePickerDialog.show();
+            }
+        });
+        //19-04-2022
+
 
         // camera permission \\
         if(ContextCompat.checkSelfPermission(VehLicAddData.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -116,40 +154,46 @@ public class VehLicAddData extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 click_sound.start();
-                try {
-                    confirm.setTitle("Confirm")
-                            .setMessage("Make sure the Vehicle Licence Number is Correct!"+"\n")
-                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                //try {
+                //confirm.setTitle("Confirm")
+                //.setMessage("Make sure the Vehicle Licence Number is Correct!"+"\n")
+                //.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                //@Override
+                //public void onClick(DialogInterface dialog, int which) {
 
-                                    // save the data to firebase \\
-                                    VehLicData vehLicData = new VehLicData(vehLicNo  , vehLicDate ,vehClass);
+                // save the data to firebase \\
+                if(edit_vehLicDate.getText().toString().length() !=10){
+                    Toast.makeText(VehLicAddData.this, "The data is incorrect. Please correct the data or provide the vehicle license again", Toast.LENGTH_LONG).show();
+                }else{
+                    VehLicData vehLicData = new VehLicData(edit_vehLicNo.getText().toString()  , edit_vehLicDate.getText().toString() ,edit_vehClass.getText().toString());
 
-                                    reference.child(vehLicNo).setValue(vehLicData);
-                                    //e,end\\
-                                    // save the data to db \\
-                                    db= SQLiteDatabase.openDatabase("/data/data/com.example.v12_1/LicenceDB", null ,SQLiteDatabase.CREATE_IF_NECESSARY);
-                                    sql = "CREATE TABLE IF NOT EXISTS VehicleLicence(vehLicDataNo INTEGER PRIMARY KEY AUTOINCREMENT, vehLicNo text,vehClass text, vehLicDate date);";
-                                    db.execSQL(sql);
-                                    String row = "INSERT INTO VehicleLicence(vehLicNo,vehClass,vehLicDate) Values ('"+vehLicNo+"','"+vehClass+"','"+vehLicDate+"')";
-                                    db.execSQL(row);
-                                    db.close();
-                                    //e,end\\
-                                    Toast.makeText(VehLicAddData.this, "Save Data Successfully", Toast.LENGTH_LONG).show();
-                                    correct_sound.start();
-                                    nextActivity();
-                                }
-                            }).setNegativeButton("Back", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    }).show();
-                }catch (Exception e){
-                    Toast.makeText(VehLicAddData.this,"Please Retake again!!\nThe data incorrect!!",Toast.LENGTH_SHORT).show();
+                    reference.child(vehLicNo).setValue(vehLicData);
+                    //e,end\\
+                    // save the data to db \\
+                    db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper/LicenceDB", null ,SQLiteDatabase.CREATE_IF_NECESSARY);
+                    sql = "CREATE TABLE IF NOT EXISTS VehicleLicence(vehLicDataNo INTEGER PRIMARY KEY AUTOINCREMENT, vehLicNo text,vehClass text, vehLicDate date);";
+                    db.execSQL(sql);
+                    String row = "INSERT INTO VehicleLicence(vehLicNo,vehClass,vehLicDate) Values ('"+edit_vehLicNo.getText().toString()+"','"+edit_vehClass.getText().toString()+"','"+edit_vehLicDate.getText().toString()+"')";
+                    db.execSQL(row);
+                    db.close();
+                    //e,end\\
+                    //Toast.makeText(VehLicAddData.this, "Save Data Successfully", Toast.LENGTH_LONG).show();
+                    correct_sound.start();
+                    nextActivity();
                 }
             }
+
+            //})
+            //.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+            //@Override
+            //public void onClick(DialogInterface dialog, int which) {
+            //dialog.cancel();
+            //}
+            //}).show();
+            //}catch (Exception e){
+            //Toast.makeText(VehLicAddData.this,"Please Retake again!!\nThe data incorrect!!",Toast.LENGTH_SHORT).show();
+            //}
+            //}
         });
         //b,b end\\
     }
@@ -169,6 +213,7 @@ public class VehLicAddData extends AppCompatActivity {
                     filter.addSubFilter(new BrightnessSubFilter(100));
                     filter.addSubFilter(new ContrastSubFilter(1.2f));
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),resultUri);
+                    imageCapture.setImageBitmap(bitmap);
                     Bitmap image = bitmap.copy(Bitmap.Config.ARGB_8888,true);
                     Bitmap outputImage = filter.processFilter(image);
                     getTextFromImage(outputImage);
@@ -211,11 +256,20 @@ public class VehLicAddData extends AppCompatActivity {
                     }
                 }
                 setData(vehLicNo, vehLicDate, vehClass);
-                textview_data.setText(stringBuilder.toString());
+                //19-4-2022
+                imageCapture.setVisibility(View.VISIBLE);
+                edit_vehLicNo.setText(vehLicNo);
+                edit_vehClass.setText(vehClass);
+                edit_vehLicDate.setText(vehLicDate);
+                veh_showDate.setVisibility(View.VISIBLE);
+                //19-4-2022
+
+                //textview_data.setText(stringBuilder.toString());
                 button_capture.setText("Retake");
-                textVehSample2.setText("If the data is incorrect, you can be provided later or retake the information.");
+                textVehSample2.setVisibility(View.GONE);
+                //textVehSample2.setText("Make sure the data is correct");
                 imageVehSample.setVisibility(View.GONE);
-                button_back.setVisibility(View.GONE);
+
                 button_saveVehLicData.setVisibility(View.VISIBLE);
             } catch (Exception e) {
                 e.printStackTrace();
