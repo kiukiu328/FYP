@@ -1,1 +1,5 @@
+Run Car-License-Plate-Recognition.ipynb
 
+Car-Plate-Recognition.ipynb is only called in Car-License-Plate-Recognition.ipynb and output the car-plate number from the capture.
+
+Car-License-Plate-Recognition.ipynb is used to capture a car-plate after the recognition.
