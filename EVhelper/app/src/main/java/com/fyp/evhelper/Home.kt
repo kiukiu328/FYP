@@ -8,6 +8,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -72,6 +73,10 @@ class Home : Fragment() {
         val tempValue: TextView = v.findViewById(R.id.tempValue)
         val humidityValue: TextView = v.findViewById(R.id.humidityValue)
         val pressureValue: TextView = v.findViewById(R.id.pressureValue)
+        val humidityBackground:CardView = v.findViewById(R.id.humidityBackground)
+        val pressureBackground:CardView = v.findViewById(R.id.pressureBackground)
+        val tempBackground:CardView = v.findViewById(R.id.tempBackground)
+        val voltBackground:CardView = v.findViewById(R.id.voltBackground)
         var apiResponse: String
         var jObj: JSONObject
         var imageStream: InputStream
@@ -170,11 +175,22 @@ class Home : Fragment() {
                             pressureValue.textSize = textSize
                             humidityValue.textSize = textSize
                             voltValue.textSize = textSize
+
                             tempValue.text = "${jObj.getString("temperature")}°C"
                             pressureValue.text = "%.0f Pa".format(jObj.getDouble("pressure"))
                             humidityValue.text =
                                 "%.0f%%".format(jObj.getDouble("humidity"))
                             voltValue.text = "${jObj.getString("voltage")}v"
+
+                            if (jObj.getDouble("voltage") > 2)
+                                voltBackground.setCardBackgroundColor(Color.GREEN)
+                            else
+                                voltBackground.setCardBackgroundColor(if (jObj.getDouble("voltage") > 1) Color.YELLOW else Color.RED)
+
+                            if (jObj.getDouble("temperature") < 25)
+                                tempBackground.setCardBackgroundColor(Color.GREEN)
+                            else
+                                tempBackground.setCardBackgroundColor(if (jObj.getDouble("temperature") < 30) Color.YELLOW else Color.RED)
                         }
 
                     } catch (e: Exception) {
@@ -200,7 +216,7 @@ class Home : Fragment() {
                             print(e)
                         }
                     }
-                    delay(10 * 1000)
+                    delay(60 * 1000)
                 }
 
             }
@@ -238,6 +254,11 @@ class Home : Fragment() {
             )
         )
         for (i in booking) {
+            try {
+                i.value as HashMap<*, *>
+            }catch (e:java.lang.Exception){
+                continue
+            }
             val item: HashMap<String, String> = HashMap()
             item["EntranceTime"] = (i.value as HashMap<*, *>)["entrance_time"].toString()
             item["ExitTime"] = (i.value as HashMap<*, *>)["exit_time"].toString()

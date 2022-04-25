@@ -27,12 +27,12 @@ import javax.net.SocketFactory;
 
 public class LiveStream extends AppCompatActivity {
 
-    ImageButton btn_exit,stop_play_btn;
-    GetFrame getFrame=null;
+    ImageButton btn_exit, stop_play_btn;
+    GetFrame getFrame = null;
     ImageView img_container;
     Intent FirstPage;
 
-    String ip_address ="";
+    String ip_address = "";
     final int PORT = 9990;
     Handler displayFrame;
     boolean play_pause = true; //true is playing false is pausing
@@ -40,75 +40,76 @@ public class LiveStream extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_stream_page);
-        if(ip_address==""){
-            ip_address= getIntent().getExtras().getString("ip_address");
+        if (ip_address == "") {
+            ip_address = getIntent().getExtras().getString("ip_address");
         }
-        Log.w("ip address",ip_address);
+        Log.w("ip address", ip_address);
         init();
     }
 
-    public void controlVideo(){
+    public void controlVideo() {
         Bitmap start = BitmapFactory.decodeResource(this.getResources(),
                 R.drawable.play_stream);
         Bitmap pause = BitmapFactory.decodeResource(this.getResources(),
                 R.drawable.pause_stream);
-        if(play_pause){
+        if (play_pause) {
             getFrame.setShow_frame(false);
-            play_pause=false;
+            play_pause = false;
             stop_play_btn.setImageBitmap(start);
-        }else{
+        } else {
             getFrame.setShow_frame(true);
-            play_pause=true;
+            play_pause = true;
             stop_play_btn.setImageBitmap(pause);
         }
     }
 
-    private void init(){
-        btn_exit=findViewById(R.id.btn_exit);
-        img_container=findViewById(R.id.stream_content);
-        stop_play_btn=findViewById(R.id.stop_play_btn);
+    private void init() {
+        btn_exit = findViewById(R.id.btn_exit);
+        img_container = findViewById(R.id.stream_content);
+        stop_play_btn = findViewById(R.id.stop_play_btn);
         //开始直播
-        getFrame= new GetFrame();
+        getFrame = new GetFrame();
         getFrame.start();
 //        Toast.makeText(getApplicationContext(),"show live",Toast.LENGTH_SHORT).show();
 
-        FirstPage = new Intent(this,Stream.class);
+        FirstPage = new Intent(this, Stream.class);
 
-        stop_play_btn.setOnClickListener(new View.OnClickListener(){
+        stop_play_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 controlVideo();
             }
         });
 
-        btn_exit.setOnClickListener(new View.OnClickListener(){
+        btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"exit button",Toast.LENGTH_SHORT).show();
-               finish();
+                Toast.makeText(getApplicationContext(), "exit button", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
-        displayFrame = new Handler(){
-            public void handleMessage(Message msg){
+        displayFrame = new Handler() {
+            public void handleMessage(Message msg) {
                 img_container.setImageBitmap((Bitmap) msg.obj);
             }
         };
 
     }
 
-    protected void onRestart(){
+    protected void onRestart() {
         super.onRestart();
 //        Toast.makeText(getApplicationContext(),"Activity restart",Toast.LENGTH_SHORT).show();
-        if(getFrame!=null) {
-            getFrame= new GetFrame();
+        if (getFrame != null) {
+            getFrame = new GetFrame();
             getFrame.start();
         }
     }
-    protected void onStop(){
+
+    protected void onStop() {
         super.onStop();
 //        Toast.makeText(getApplicationContext(),"Activity Stop",Toast.LENGTH_SHORT).show();
-        if(getFrame!=null) {
+        if (getFrame != null) {
             getFrame.setStopFlag(true);
         }
     }
@@ -122,18 +123,20 @@ public class LiveStream extends AppCompatActivity {
 //
 //        }
 
-        public void setShow_frame(boolean show_frame){
-            this.show_frame=show_frame;
+        public void setShow_frame(boolean show_frame) {
+            this.show_frame = show_frame;
         }
 
 
-        public void run(){
-            while(!stopFlag) {
+        public void run() {
+            while (!stopFlag) {
                 if (ip_address != "") {
                     if (show_frame == true) {
                         try {
                             Socket socket = SocketFactory.getDefault().createSocket(ip_address, PORT);
-
+                            Log.d(null,"LiveStream Socket");
+                            Log.d("ip", ip_address);
+                            Log.d("PORT", "" + PORT);
                             InputStream in = socket.getInputStream();
                             OutputStream out = socket.getOutputStream();
 
@@ -162,6 +165,7 @@ public class LiveStream extends AppCompatActivity {
                 }
             }
         }
+
         public void setStopFlag(boolean stopFlag) {
             this.stopFlag = stopFlag;
         }

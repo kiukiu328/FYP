@@ -17,8 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EVHelper"
-
-        >
+        android:usesCleartextTraffic="true">
         <activity
             android:name="com.fyp.evhelper.book.Duration"
             android:exported="false" />
