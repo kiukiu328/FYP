@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal"
-            android:background="@drawable/tool_bar_color_y2"
+            android:background="@color/spr_bg_yellow"
             >
             <Button
                 android:layout_width="52dp"
@@ -52,7 +52,8 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
         android:orientation="vertical"
         android:paddingHorizontal="30dp"
         >
@@ -67,7 +68,7 @@
                 android:text="Car Testing Date : "
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 />
             <EditText
                 android:layout_width="wrap_content"
@@ -78,7 +79,7 @@
                 android:textIsSelectable="true"
                 android:focusable="false"
                 android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:textColor="@color/spr_bg_yellow"/>
 
         </LinearLayout>
         <LinearLayout
@@ -92,7 +93,7 @@
                 android:text="Car Testing Time : "
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:textColor="@color/black"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,269 +103,277 @@
                 android:textIsSelectable="true"
                 android:focusable="false"
                 android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:textColor="@color/spr_bg_yellow"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ctcShow2"
+            android:orientation="vertical"
+            android:visibility="visible">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Area : "
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+                <Spinner
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/spr_centreArea"
+                    android:spinnerMode="dropdown"
+                    android:textStyle="bold"
+
+                    android:popupBackground="@color/black"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="District : "
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+                <Spinner
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/spr_centreDistrict"
+                    android:spinnerMode="dropdown"
+                    android:textStyle="bold"
+                    android:popupBackground="@color/black"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Centre : "
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+                <Spinner
+                    android:layout_marginLeft="19dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:id="@+id/spr_centreName"
+                    android:spinnerMode="dropdown"
+                    android:lineSpacingExtra="10sp"
+                    android:popupBackground="@color/black"
+
+
+                    />
+            </LinearLayout>
+            <!--                <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="10dp"
+                                android:visibility="gone"
+                                >
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="10dp"
+                                >
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textSize="16sp"
+                                    android:id="@+id/txt_centreInfo"
+                                    android:lineSpacingExtra="4sp"/>
+                            </LinearLayout>-->
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView"
+            android:layout_marginTop="10dp"
+            >
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ctcShow2"
+                android:id="@+id/ctcShow"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="visible"
+                android:background="@drawable/ctc_info2"
+                android:padding="15dp">
+                //Centre Name
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_marginTop="10dp"
                     >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Area : "
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"/>
-                    <Spinner
-                        android:layout_marginLeft="30dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:text="Centre Name : "
                         android:textSize="18sp"
-                        android:id="@+id/spr_centreArea"
-                        android:spinnerMode="dropdown"
                         android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:popupBackground="@color/spr_bg_yellow"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    >
+                        android:textColor="@color/black"/>
                     <TextView
+                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="District : "
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"/>
-                    <Spinner
-                        android:layout_marginLeft="8dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:id="@+id/spr_centreDistrict"
-                        android:spinnerMode="dropdown"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"
-                        android:popupBackground="@color/spr_bg_yellow"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Centre : "
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"/>
-                    <Spinner
-                        android:layout_marginLeft="19dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:id="@+id/spr_centreName"
-                        android:spinnerMode="dropdown"
-                        android:lineSpacingExtra="10sp"
-                        android:popupBackground="@color/spr_bg_yellow"
-
+                        android:text=""
+                        android:textColor="@color/bg_blue"
+                        android:textSize="16sp"
+                        android:id="@+id/txt_centreName"
                         />
                 </LinearLayout>
-<!--                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    >
-                </LinearLayout>
+                //Centre Name
+                //Centre Tel
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_marginTop="10dp"
                     >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Centre Tel : "
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textSize="16sp"
-                        android:id="@+id/txt_centreInfo"
-                        android:lineSpacingExtra="4sp"/>
-                </LinearLayout>-->
-            </LinearLayout>
-
-<ScrollView
-    android:layout_width="wrap_content"
-    android:layout_height="250dp"
-    android:id="@+id/scrollView"
-    android:layout_marginTop="10dp"
-    >
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/ctcShow"
-                android:orientation="vertical"
-                android:visibility="visible">
-            //Centre Name
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
+                        android:id="@+id/txt_centreTel"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/bg_blue"
+                        />
+                </LinearLayout>
+                //Centre Tel
+                //Centre Location
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Centre Name : "
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"/>
-                <TextView
+                    android:orientation="vertical"
                     android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Centre Location : "
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:id="@+id/txt_ctcLocation"
+                        android:textSize="16sp"
+                        android:lineSpacingMultiplier="1.26"
+                        android:textColor="@color/bg_blue"
+                        />
+                </LinearLayout>
+                //Centre Location
+                //Working Hours
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/blue"
-                    android:textSize="16sp"
-                    android:id="@+id/txt_centreName"
-                    />
-            </LinearLayout>
-            //Centre Name
-            //Centre Tel
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Centre Tel : "
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="16sp"
-                    android:id="@+id/txt_centreTel"
+                    android:orientation="vertical"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/blue"
-                    />
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Working Hours : "
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/spr_bg_yellow"
+                        android:textStyle="bold"
+                        android:id="@+id/txt_workingHours"
+                        android:textSize="16sp"
+                        android:lineSpacingMultiplier="1.26"
+                        />
+                </LinearLayout>
+                //Working Hours
             </LinearLayout>
-            //Centre Tel
-            //Centre Location
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Centre Location : "
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"/>
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:id="@+id/txt_ctcLocation"
-                    android:textSize="16sp"
-                    android:lineSpacingMultiplier="1.26"
-                    android:textColor="@color/blue"
-                    />
-            </LinearLayout>
-            //Centre Location
-            //Working Hours
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Working Hours : "
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"/>
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:id="@+id/txt_workingHours"
-                    android:textSize="16sp"
-                    android:lineSpacingMultiplier="1.26"
-                    />
-            </LinearLayout>
-            //Working Hours
-            </LinearLayout>
-</ScrollView>
+        </ScrollView>
     </LinearLayout>
     //btn
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="100dp"
-        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="30dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginVertical="10dp"
+        android:layout_weight="9"
         >
         <android.widget.Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Save"
             android:id="@+id/btn_createCTC"
             android:visibility="visible"
             android:background="@drawable/cust_btn_color"
             android:textStyle="bold"
             android:textColor="@color/white"
+
             />
         <android.widget.Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Google Calender"
+            android:layout_height="match_parent"
+            android:text="Sync Google Calender"
             android:id="@+id/btn_googleCalender"
             android:visibility="gone"
             android:background="@drawable/cust_btn_color"
             android:textStyle="bold"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            />
         <android.widget.Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Modify"
+            android:layout_weight="1"
             android:id="@+id/btn_modifyData"
             android:visibility="gone"
             android:background="@drawable/cust_btn_color"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginLeft="10dp"
+            />
     </LinearLayout>
 
 </LinearLayout>
