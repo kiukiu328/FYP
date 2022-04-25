@@ -54,6 +54,7 @@
             android:exported="false" />
         <activity
             android:name="com.fyp.evhelper.reminder.DriLicAddData"
+<<<<<<< Updated upstream
             android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"      
              />
         <activity
@@ -61,6 +62,17 @@
             android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"      
             />
 
+=======
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar" />
+        <activity
+            android:name="com.fyp.evhelper.reminder.VehLicAddData"
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar" />
+>>>>>>> Stashed changes
 
         <meta-data
 
@@ -76,6 +88,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name="com.fyp.evhelper.stream.MyFirebaseMessagingService"
             android:exported="false">

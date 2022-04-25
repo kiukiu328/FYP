@@ -21,8 +21,8 @@ class Setting : Fragment() {
 
         val configuration = Configuration()
         val rgLang: RadioGroup = v.findViewById(R.id.rgLanguage)
-        configuration.locale = Locale("zh-hk")
-        (v.context as ContextThemeWrapper).applyOverrideConfiguration(configuration)
+        configuration.locale = Locale.TRADITIONAL_CHINESE
+//        (v.context as ContextThemeWrapper).applyOverrideConfiguration(configuration)
 //        LocaleHelper.setLocale(v.context, "zh-hk");
 //        val context = LocaleHelper.setLocale(MainActivity.this, "en")
 //        val resources = context.getResources()
