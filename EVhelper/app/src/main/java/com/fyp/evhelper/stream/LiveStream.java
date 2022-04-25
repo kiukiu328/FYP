@@ -134,9 +134,6 @@ public class LiveStream extends AppCompatActivity {
                     if (show_frame == true) {
                         try {
                             Socket socket = SocketFactory.getDefault().createSocket(ip_address, PORT);
-                            Log.d(null,"LiveStream Socket");
-                            Log.d("ip", ip_address);
-                            Log.d("PORT", "" + PORT);
                             InputStream in = socket.getInputStream();
                             OutputStream out = socket.getOutputStream();
 
@@ -159,6 +156,7 @@ public class LiveStream extends AppCompatActivity {
                             buffer.close();
 //                    Log.d("byte_length", Integer.toString(decodedBytes.length));
                         } catch (Exception e) {
+                            Log.d("LiveStream", "error");
                             e.printStackTrace();
                         }
                     }

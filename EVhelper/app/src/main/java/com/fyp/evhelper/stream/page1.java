@@ -198,7 +198,7 @@ public class page1 extends Fragment {
 
     class GetPicture extends Thread {
         //        ImageView img_container;
-//        Socket socket;
+        Socket socket;
         InputStream in;
         OutputStream out;
         DataInputStream buffer;
@@ -208,24 +208,19 @@ public class page1 extends Fragment {
             while (!stopFlag) {
                 if (ip_address != "") {
                     try {
-                        Log.d("ip", ip_address);
-                        Log.d("PORT", "" + PORT);
-                        Log.d(null, "flag0");
-                        Socket socket = SocketFactory.getDefault().createSocket(ip_address, PORT);
+                        socket = SocketFactory.getDefault().createSocket(ip_address, PORT);
 
-                        Log.d(null, "flag1");
 
                         in = socket.getInputStream();
                         out = socket.getOutputStream();
 
                         String frame = "";
                         out.write("picture".getBytes());
-                        Log.d(null, "flag2");
 
                         buffer = new DataInputStream(new BufferedInputStream(in));
 
                         frame = buffer.readLine();
-                        Log.d(null, frame);
+                        Log.d("frame", frame);
 
                         if (frame == null) {
                             continue;
@@ -251,6 +246,7 @@ public class page1 extends Fragment {
                         buffer.close();
 
                     } catch (Exception e) {
+                        Log.d("page1", "error");
                         e.printStackTrace();
                     }
                 }

@@ -71,7 +71,7 @@ public class page2 extends Fragment {
 
     public void init_address(){
         SharedPreferences preferences=getActivity().getSharedPreferences("parameter", Context.MODE_PRIVATE);
-        ip_address=preferences.getString("ip_address","");
+        ip_address=preferences.getString("ip_address","192.168.0.184");
 
     }
     @Override
@@ -97,7 +97,6 @@ public class page2 extends Fragment {
         loading.getBackground().setAlpha(200);
 
 //        loading= context.findViewById(R.id.loading);
-        getAlertReocrd();
         AlertRecordAdapter alertAdapter = new AlertRecordAdapter(getActivity(), R.layout.list_item, setData);
         listView.setAdapter(alertAdapter);
 
@@ -117,22 +116,25 @@ public class page2 extends Fragment {
                                                    loading.setVisibility(View.VISIBLE);
                                                    loading_icon.startAnimation(rotate);
                                                    new RetrieveAlertRecord().execute("http://"+ip_address+":8080/AlertRecordJSON");
-//                   Toast.makeText(getContext(),"refresh",Toast.LENGTH_SHORT).show();
+//                   Toast.makeText(getContext(),"http://"+ip_address+":8080/AlertRecordJSON",Toast.LENGTH_SHORT).show();
                                                    refreshLayout.setRefreshing(false);
                                                }
                                            }
 
         );
 
+        String address = String.format("http://"+ip_address+":8080/AlertRecordJSON");
+        getAlertReocrd(address);
         Log.w("view","page2 view create");
         // Inflate the layout for this fragment
+
         return context;
     }
 
-    public void getAlertReocrd(){
+    public void getAlertReocrd(String add){
         loading.setVisibility(View.VISIBLE);
         loading_icon.startAnimation(rotate);
-        new RetrieveAlertRecord().execute("http://"+ip_address+":8080/AlertRecordJSON");
+        new RetrieveAlertRecord().execute(add);
     }
 
     public void displayItem(){
@@ -147,8 +149,6 @@ public class page2 extends Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
-
-
             HttpURLConnection connection = null;
             BufferedReader reader = null;
             try{
@@ -167,6 +167,7 @@ public class page2 extends Fragment {
                 return buffer.toString();
             }catch(Exception e){
                 e.printStackTrace();
+//                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }finally{
                 if (connection != null) {
                     connection.disconnect();

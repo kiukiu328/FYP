@@ -73,10 +73,10 @@ class Home : Fragment() {
         val tempValue: TextView = v.findViewById(R.id.tempValue)
         val humidityValue: TextView = v.findViewById(R.id.humidityValue)
         val pressureValue: TextView = v.findViewById(R.id.pressureValue)
-        val humidityBackground:CardView = v.findViewById(R.id.humidityBackground)
-        val pressureBackground:CardView = v.findViewById(R.id.pressureBackground)
-        val tempBackground:CardView = v.findViewById(R.id.tempBackground)
-        val voltBackground:CardView = v.findViewById(R.id.voltBackground)
+        val humidityBackground: CardView = v.findViewById(R.id.humidityBackground)
+        val pressureBackground: CardView = v.findViewById(R.id.pressureBackground)
+        val tempBackground: CardView = v.findViewById(R.id.tempBackground)
+        val voltBackground: CardView = v.findViewById(R.id.voltBackground)
         var apiResponse: String
         var jObj: JSONObject
         var imageStream: InputStream
@@ -92,7 +92,7 @@ class Home : Fragment() {
                 data = snapshot.child("Data").value as HashMap<String, Objects>
                 setBookingHistory(v, booking)
 //                setMaintenance(v, data)
-                Log.d(null, "gotDate")
+//                Log.d(null, "gotDate")
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -237,7 +237,7 @@ class Home : Fragment() {
     }
 
     private fun setBookingHistory(v: View, booking: HashMap<String, Objects>) {
-        Log.d(null, "setBookingHistory")
+//        Log.d(null, "setBookingHistory")
         val bookingHistoryList: ListView = v.findViewById(R.id.bookingHistoryList)
         val historyArrayList: ArrayList<HashMap<String, String>> = ArrayList()
         // creating a new array adapter for our list view.
@@ -256,7 +256,7 @@ class Home : Fragment() {
         for (i in booking) {
             try {
                 i.value as HashMap<*, *>
-            }catch (e:java.lang.Exception){
+            } catch (e: java.lang.Exception) {
                 continue
             }
             val item: HashMap<String, String> = HashMap()
