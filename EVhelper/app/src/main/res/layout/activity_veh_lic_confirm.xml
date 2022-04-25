@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".reminder.VehLicConfirm"
     android:orientation="vertical"
-    android:background="@drawable/car4"
+    android:background="@drawable/car6"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:background="@drawable/tool_bar_color_y2"
+            android:background="@color/spr_bg_yellow"
             android:orientation="horizontal"
 
             >
@@ -25,7 +25,7 @@
                 android:layout_height="52dp"
                 android:backgroundTint="@color/noColor"
                 android:layout_marginLeft="10dp"
-                android:drawableLeft="@drawable/ic_baseline_home_24"
+                app:icon="@drawable/ic_baseline_home_24"
                 app:iconGravity="textStart"
                 android:visibility="gone"
                 android:id="@+id/mainPageBtn"></Button>
@@ -34,7 +34,7 @@
                 android:layout_height="52dp"
                 android:backgroundTint="@color/noColor"
                 android:layout_marginLeft="10dp"
-                android:drawableLeft="@drawable/ic_baseline_arrow_back_ios_24"
+                app:icon="@drawable/ic_baseline_arrow_back_ios_24"
                 app:iconGravity="textStart"
 
                 android:id="@+id/btn_back"
@@ -52,106 +52,132 @@
                 />
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="50dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vehicle Licence Number : "
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            />
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/edit_vehLicNo"
-            android:inputType="none"
-            android:textIsSelectable="true"
-            android:focusable="false"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vehicle Class : "
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/edit_vehClass"
-            android:focusable="false"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vehicle Licence Valid To : "
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/edit_vehLicDate"
-            android:inputType="none"
-            android:textIsSelectable="true"
-            android:focusable="false"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="100dp"
-        android:layout_marginHorizontal="50dp">
-        <android.widget.Button
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="30dp"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Google Calender"
-            android:id="@+id/btn_googleCalender"
-            android:background="@drawable/cust_btn_color"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-        <android.widget.Button
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/ctc_info2"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vehicle Licence Number  "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edit_vehLicNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="@color/spr_bg_yellow"
+                    android:textIsSelectable="true"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vehicle Class  "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edit_vehClass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="@color/spr_bg_yellow"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vehicle Licence Valid To  "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/edit_vehLicDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/click_effect"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="@color/spr_bg_yellow"
+                    android:textIsSelectable="true"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Modify"
-            android:id="@+id/btn_modifyData"
-            android:background="@drawable/cust_btn_color"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textColor="@color/white"/>
-    </LinearLayout>
+            android:layout_marginTop="100dp"
+            android:orientation="vertical">
+
+            <android.widget.Button
+                android:id="@+id/btn_googleCalender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cust_btn_color"
+                android:text="Sync Google Calender"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <android.widget.Button
+                android:id="@+id/btn_modifyData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/cust_btn_color"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
