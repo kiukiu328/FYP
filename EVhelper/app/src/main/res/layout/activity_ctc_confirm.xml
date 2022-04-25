@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".CTCConfirm"
     android:orientation="vertical"
-    android:background="@drawable/car4">
+    android:background="@drawable/car6">
     //actionBar
     <LinearLayout
         android:layout_width="match_parent"
