@@ -181,7 +181,7 @@ public class VehLicConfirm extends AppCompatActivity {
     @SuppressLint("Range")
     public void readData(){
         try {
-            db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper.reminder/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
+            db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
             cursor= db.rawQuery("SELECT * FROM VehicleLicence WHERE vehLicDataNo = 1" , null);
             while (cursor.moveToNext()) {
                 this.vehLicNo = cursor.getString(cursor.getColumnIndex("vehLicNo"));
@@ -203,7 +203,7 @@ public class VehLicConfirm extends AppCompatActivity {
     @SuppressLint("Range")
     public void upData(EditText edit_vehLicNo,EditText edit_vehLicDate,EditText edit_vehClass){
         try {
-            db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper.reminder/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
+            db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
             ContentValues contentValues = new ContentValues();
 
             contentValues.put("vehLicDate", edit_vehLicDate.getText().toString());
