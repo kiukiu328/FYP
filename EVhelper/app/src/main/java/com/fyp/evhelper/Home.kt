@@ -320,6 +320,7 @@ class Home : Fragment() {
                 onCreate = false
             }
             top10Layout.removeAllViews()
+            top10List = Array(11) { TableRow(v.context) }
 //            top10Layout.addView(name)
             for (tv in top10List) {
                 tv.setOnClickListener {
