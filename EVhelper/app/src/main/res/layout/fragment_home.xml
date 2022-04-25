@@ -103,7 +103,7 @@
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_alignParentEnd="true"
-                                    app:cardBackgroundColor="@color/green"
+                                    app:cardBackgroundColor="@color/gray"
                                     app:cardCornerRadius="10dp" />
 
                                 <TextView
@@ -149,7 +149,7 @@
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_alignParentEnd="true"
-                                    app:cardBackgroundColor="@color/green"
+                                    app:cardBackgroundColor="@color/gray"
                                     app:cardCornerRadius="10dp" />
 
 
@@ -202,7 +202,7 @@
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_alignParentEnd="true"
-                                    app:cardBackgroundColor="@color/green"
+                                    app:cardBackgroundColor="@color/gray"
                                     app:cardCornerRadius="10dp" />
 
                                 <TextView
@@ -249,7 +249,7 @@
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_alignParentEnd="true"
-                                    app:cardBackgroundColor="@color/green"
+                                    app:cardBackgroundColor="@color/gray"
                                     app:cardCornerRadius="10dp" />
 
                                 <TextView

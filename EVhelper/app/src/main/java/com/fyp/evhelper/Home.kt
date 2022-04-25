@@ -58,7 +58,6 @@ class Home : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_home, container, false)
-        Log.d(null, "onCreateView")
         onCreate = true
         viewDestroy = false
         val tvExtendTable: TextView = v.findViewById(R.id.tvExtendTable)

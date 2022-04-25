@@ -6,10 +6,16 @@
 
 
 import psutil
+
+
 def get_WLAN_address():
     wlan_address = ""
     info = psutil.net_if_addrs()
-    wlan = info['WLAN']
+    try:
+        wlan = info['WLAN']
+    except:
+        wlan = info['Wi-Fi']
+
     for i in wlan:
         for j in i:
             if '192.168' in str(j):
