@@ -108,7 +108,8 @@ public class VehLicConfirm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 click_sound.start();
-                finish();
+                Intent intent = new Intent(VehLicConfirm.this, ReminderMainPage.class);
+                startActivity(intent);
             }
         });
         //c,c end\\
