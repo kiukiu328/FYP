@@ -256,8 +256,6 @@ public class DriLicAddData extends AppCompatActivity {
                 edit_driName.setText(driName);
                 edit_driLicDate.setText(driLicDate);
                 dri_showDate.setVisibility(View.VISIBLE);
-                imageCapture.setMaxWidth(imageCapture.getWidth() + imageCapture.getWidth());
-                imageCapture.setMaxHeight(imageCapture.getHeight() + imageCapture.getHeight());
                 //imageCapture.requestLayout();
                 imageCapture.setVisibility(View.VISIBLE);
                 //19-4-2022
