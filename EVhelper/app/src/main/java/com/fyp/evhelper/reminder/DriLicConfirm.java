@@ -183,7 +183,7 @@ public class DriLicConfirm extends AppCompatActivity {
     @SuppressLint("Range")
     public void readData(){
         try {
-            db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper.reminder/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
+            db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
             cursor= db.rawQuery("SELECT * FROM DrivingLicence WHERE driLicDataNo = 1" , null);
             while (cursor.moveToNext()) {
                 this.driLicNo = cursor.getString(cursor.getColumnIndex("driLicNo"));
@@ -204,7 +204,7 @@ public class DriLicConfirm extends AppCompatActivity {
     @SuppressLint("Range")
     public void upData(EditText edit_driName, EditText edit_driLicNo, EditText edit_driLicDate){
         try {
-            db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper.reminder/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
+            db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper/LicenceDB", null ,SQLiteDatabase.OPEN_READWRITE);
             ContentValues contentValues = new ContentValues();
             contentValues.put("driName", edit_driName.getText().toString());
             //contentValues.put("driLicNo", String.valueOf(edit_driLicNo));
