@@ -78,8 +78,8 @@ public class CTCConfirm extends AppCompatActivity implements AdapterView.OnItemS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+      //  requestWindowFeature(Window.FEATURE_NO_TITLE);
+       // this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_ctc_confirm);
         mainPageBtn = findViewById(R.id.mainPageBtn);
