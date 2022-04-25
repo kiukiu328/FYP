@@ -236,15 +236,18 @@ def print_frame():
     global server,face_detect_module,detectedImage
     alert()
     while 1:
-        if(server is not None and len(server.frame2)!=0):
-            if(len(server.frame2) !=0):
-                #print frame
+        if (server is not None and len(server.frame2) != 0):
+            if (len(server.frame2) != 0):
+                # print frame
                 # print(server.frame2)
-                detectedImage=face_detect_module.detect(server.frame2)
-                #true and false
-
-                detectedImage = cv2.putText(detectedImage, f"Detected time:{num}", (int(5), int(55)),
-                                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+                detectedImage = face_detect_module.detect(server.frame2)
+                # true and false
+                if (num != 0):
+                    detectedImage = cv2.putText(detectedImage, f"Detected time:{num}", (int(5), int(55)),
+                                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1)
+                else:
+                    detectedImage = cv2.putText(detectedImage, f"Detected time:{num}", (int(5), int(55)),
+                                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
                 cv2.imshow('face-detection-demo2', detectedImage)
                 cv2.waitKey(1)
 
