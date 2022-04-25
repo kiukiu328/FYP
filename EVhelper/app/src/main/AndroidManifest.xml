@@ -54,9 +54,11 @@
             android:exported="false" />
         <activity
             android:name="com.fyp.evhelper.reminder.DriLicAddData"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"      
              />
         <activity
             android:name="com.fyp.evhelper.reminder.VehLicAddData"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"      
             />
 
 
