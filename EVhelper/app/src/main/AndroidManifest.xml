@@ -54,15 +54,6 @@
             android:exported="false" />
         <activity
             android:name="com.fyp.evhelper.reminder.DriLicAddData"
-<<<<<<< Updated upstream
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"      
-             />
-        <activity
-            android:name="com.fyp.evhelper.reminder.VehLicAddData"
-            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"      
-            />
-
-=======
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar" />
         <activity
@@ -72,7 +63,6 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar" />
->>>>>>> Stashed changes
 
         <meta-data
 
@@ -104,7 +94,6 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" />
     </application>
 
 </manifest>
