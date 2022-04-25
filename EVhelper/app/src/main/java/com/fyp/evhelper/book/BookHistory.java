@@ -66,6 +66,8 @@ public class BookHistory extends AppCompatActivity {
 
                 //connect to the database
                 DatabaseReference clientRef = FirebaseDatabase.getInstance().getReference().child("Booking").child("Client01").child(selectedItem);
+                
+                DatabaseReference lengthRef = FirebaseDatabase.getInstance().getReference().child("Booking").child("Client01").child("length");
 
                 clientRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -101,6 +103,13 @@ public class BookHistory extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         clientRef.removeValue();
+                                        
+                                        String recordNum = clientRef.getKey().replaceFirst("^0+(?!$)", "");
+
+                                        int rnum = Integer.parseInt(recordNum) - 1;
+
+                                        lengthRef.setValue(rnum);
+                                        
                                         Intent intent = new Intent(getApplicationContext(), BookHistory.class);
 
                                         startActivity(intent);
@@ -152,10 +161,14 @@ public class BookHistory extends AppCompatActivity {
                 // the database and after adding new child
                 // the item is added inside the array list and
                 // notifying the adapter that the data in adapter is changed.
-                String listTitle = snapshot.getKey();
-                listTitle += " - " + snapshot.child("car_park").getValue() + " (" + snapshot.child("book_date").getValue() + ")";
-                historyArrayList.add(listTitle);
-                adapter.notifyDataSetChanged();
+                if (snapshot.getKey().equals("length")){
+
+                } else {
+                    String listTitle = snapshot.getKey();
+                    listTitle += " - " + snapshot.child("car_park").getValue() + " (" + snapshot.child("book_date").getValue() + ")";
+                    historyArrayList.add(listTitle);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
