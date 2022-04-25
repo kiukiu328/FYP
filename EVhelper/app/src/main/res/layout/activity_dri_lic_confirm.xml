@@ -111,7 +111,10 @@
             android:id="@+id/edit_driName"
             android:textStyle="bold"
             android:textColor="@color/spr_bg_yellow"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            android:inputType="none"
+            android:textIsSelectable="true"
+            android:focusable="false"/>
     </LinearLayout>
 
     <LinearLayout
