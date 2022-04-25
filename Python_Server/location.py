@@ -13,7 +13,7 @@ mydb = mysql.connector.connect(
 )
 
 cursor = mydb.cursor()
-
+vid = cv2.VideoCapture(0)
 app = Flask(__name__)
 
 
