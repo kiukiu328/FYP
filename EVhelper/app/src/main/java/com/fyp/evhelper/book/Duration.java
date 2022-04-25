@@ -70,12 +70,62 @@ public class Duration extends AppCompatActivity {
         btnConfirm.setOnClickListener(view -> {
             String entranceTime = String.valueOf(tvE.getText());
             String leaveTime = String.valueOf(tvL.getText());
-            myRef.child("Booking").child("Client01").child("02").child("car_plate").setValue("SR7122");
-            myRef.child("Booking").child("Client01").child("02").child("car_park").setValue("Maritime Square");
-            myRef.child("Booking").child("Client01").child("02").child("book_date").setValue(bookDate);
-            myRef.child("Booking").child("Client01").child("02").child("entrance_time").setValue(entranceTime);
-            myRef.child("Booking").child("Client01").child("02").child("exit_time").setValue(leaveTime);
-            myRef.child("Booking").child("Client01").child("02").child("name").setValue("Chan Tai Man");
+
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference().child("Booking").child("Client01");
+
+            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    String recordNum = "";
+
+                    for (DataSnapshot mSnapshot: snapshot.getChildren()) {
+
+                        recordNum = mSnapshot.getKey();
+
+                        if (recordNum.equals("length")){
+                            recordNum = String.valueOf(mSnapshot.getValue());
+                        }
+                    }
+
+                    Log.e("rnum", String.valueOf(recordNum));
+
+                    recordNum = recordNum.replaceFirst("^0+(?!$)", "");
+
+
+
+                    int rnum = Integer.parseInt(recordNum) + 1;
+
+
+
+                    String newNum;
+                    if (rnum < 10) {
+                        newNum = "0" + rnum;
+                    } else {
+                        newNum = String.valueOf(rnum);
+                    }
+
+                    myRef.child("Booking").child("Client01").child(newNum).child("car_plate").setValue("SR7122");
+                    myRef.child("Booking").child("Client01").child(newNum).child("car_park").setValue("Maritime Square");
+                    myRef.child("Booking").child("Client01").child(newNum).child("book_date").setValue(bookDate);
+                    myRef.child("Booking").child("Client01").child(newNum).child("entrance_time").setValue(entranceTime);
+                    myRef.child("Booking").child("Client01").child(newNum).child("exit_time").setValue(leaveTime);
+                    myRef.child("Booking").child("Client01").child(newNum).child("name").setValue("Chan Tai Man");
+
+                    myRef.child("Booking").child("Client01").child("length").setValue(newNum);
+
+
+
+                    //dbRef.child("length").setValue(newNum);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+
+                }
+            });
+
+
 
             //Create a dialog to show booking successful message
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -91,10 +141,10 @@ public class Duration extends AppCompatActivity {
                         public void onClick(DialogInterface dialog,int id) {
                             try {
                                 Intent intent = new Intent(getApplicationContext(), BookHistory.class);
-                                startActivity(intent);
 
+                                startActivity(intent);
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                //Exception
                             }
                         }
                     });
