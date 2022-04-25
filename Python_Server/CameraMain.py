@@ -1,3 +1,5 @@
+import time
+
 import imagiz
 import cv2
 import GetNetworkAddress
@@ -8,6 +10,7 @@ client = imagiz.TCP_Client(server_ip=GetNetworkAddress.get_WLAN_address(), serve
 encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
 
 while True:
+    # time.sleep(0.05)
     r, frame = vid.read()
     if r:
         r, image = cv2.imencode('.jpg', frame, encode_param)

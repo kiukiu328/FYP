@@ -5,7 +5,7 @@ from firebase_admin import db
 try:
     firebase_admin.get_app()
 except ValueError as e:
-    cred = credentials.Certificate("./src/serviceAccountKey2.json")
+    cred = credentials.Certificate("../src/serviceAccountKey2.json")
     # firebase_admin.initialize_app(cred, {"databaseURL": 'https://test2-e7bfd-default-rtdb.firebaseio.com/'},
     #                               name="alert_message")
     firebase_admin.initialize_app(cred, {"databaseURL": 'https://fyp2021-cbba2-default-rtdb.firebaseio.com'},

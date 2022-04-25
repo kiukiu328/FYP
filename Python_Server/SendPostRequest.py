@@ -1,6 +1,8 @@
 import requests
 
-serverIP = '192.168.1.171'
+import GetNetworkAddress
+
+serverIP = GetNetworkAddress.get_WLAN_address()
 printed = False
 
 

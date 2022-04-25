@@ -73,8 +73,8 @@ def motion_detect(frame):
 
 # model_bin = "res10_300x300_ssd_iter_140000_fp16.caffemodel";
 # config_text = "deploy.prototxt";
-model_bin = "./src/res10_300x300_ssd_iter_140000_fp16.caffemodel"
-config_text = "./src/deploy.prototxt"
+model_bin = "../src/res10_300x300_ssd_iter_140000_fp16.caffemodel"
+config_text = "../src/deploy.prototxt"
 
 # load caffe model
 net = cv2.dnn.readNetFromCaffe(config_text, model_bin)

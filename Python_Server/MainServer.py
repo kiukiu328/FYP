@@ -1,3 +1,4 @@
+import Detect_Police
 import StreamReceiver
 import threading
 from face_detect2 import FaceDetect
@@ -241,6 +242,7 @@ def print_frame():
                 # print frame
                 # print(server.frame2)
                 detectedImage = face_detect_module.detect(server.frame2)
+                # detectedImage = Detect_Police.detect(server.frame2)
                 # true and false
                 if (num != 0):
                     detectedImage = cv2.putText(detectedImage, f"Detected time:{num}", (int(5), int(55)),
