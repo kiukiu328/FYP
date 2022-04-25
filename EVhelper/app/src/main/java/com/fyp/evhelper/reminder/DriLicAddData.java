@@ -165,7 +165,7 @@ public class DriLicAddData extends AppCompatActivity {
                     //e,end\\
 
                     // save the data to db \\
-                    db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper.reminder/LicenceDB", null ,SQLiteDatabase.CREATE_IF_NECESSARY);
+                    db= SQLiteDatabase.openDatabase("/data/data/com.fyp.evhelper/LicenceDB", null ,SQLiteDatabase.CREATE_IF_NECESSARY);
                     sql = "CREATE TABLE IF NOT EXISTS DrivingLicence(driLicDataNo INTEGER PRIMARY KEY AUTOINCREMENT, driLicNo text,driName text, driLicDate date);";
                     db.execSQL(sql);
                     String row = "INSERT INTO DrivingLicence(driLicNo,driName,driLicDate) Values ('"+edit_driLicNo.getText().toString()+"','"+edit_driName.getText().toString()+"','"+edit_driLicDate.getText().toString()+"')";
