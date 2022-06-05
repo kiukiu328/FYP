@@ -100,7 +100,6 @@ class Home : Fragment() {
         })
         imgLiveStream.scaleType = ImageView.ScaleType.FIT_XY
 
-
         navigationBar.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nvMain -> {
@@ -130,7 +129,9 @@ class Home : Fragment() {
                 btnExpandLiveCapture.setBackgroundResource(R.drawable.ic_baseline_expand_more_24)
                 liveCaptureOn = false
             } else {
-                imgLiveStream.layoutParams.height = dpToPx(200)
+                imgLiveStream.layoutParams.height = (requireView().height * 0.3f).toInt()
+//                imgLiveStream.layoutParams.height = dpToPx(200)
+
                 imgLiveStream.setImageBitmap(image)
                 btnExpandLiveCapture.setBackgroundResource(R.drawable.ic_baseline_expand_less_24)
                 liveCaptureOn = true
