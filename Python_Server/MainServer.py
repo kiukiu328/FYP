@@ -126,7 +126,7 @@ def zipVideo(file_name, file, target):
 def videoPhotoCapture(icon_name):
     global server
     # icon_name = f"{date_obj.month}_{date_obj.day}_{date_obj.hour}_{date_obj.minute}_{date_obj.second}"
-    icon_path = f'{script_path}\\srcUserSourceFile\\icon\\{icon_name}.jpg'
+    icon_path = f'{script_path}\\src\\UserSourceFile\\icon\\{icon_name}.jpg'
     cv2.imwrite(icon_path, server.frame2)
 
 
@@ -296,7 +296,7 @@ def start_server():
 # 刪除所有原 視頻文件
 # 不能亂動
 def clearBufferVideo():
-    root_dir = sys.path[0] + "\\BufferVideo"
+    root_dir = f"{script_path}\\src\\BufferVideo"
     for subdirs, dirs, files in os.walk(root_dir):
         for file in files:
             os.remove(subdirs + "\\" + file)
@@ -339,7 +339,7 @@ def index():
 
 @app.route("/image/<imageName>")
 def getImage(imageName):
-    image = r"UserSourceFile\icon\{}.jpg".format(imageName)
+    image = f"{script_path}\\src\\UserSourceFile\\icon\\{imageName}.jpg"
     # resp = Response(image,mimetype="image/jpeg")
     return send_file(image, mimetype="image/jpeg")
 
@@ -393,7 +393,7 @@ def get_byte_interval(request):
 
 @app.route("/video/<videoName>")
 def getVideo(videoName):
-    video = r"UserSourceFile/video/{}.mp4".format(videoName)
+    video = f"{script_path}\\src\\UserSourceFile\\video\\{videoName}.mp4"
     byte1, byte2 = get_byte_interval(request)
 
     chunk, start, length, file_size = get_chunk(
@@ -486,12 +486,8 @@ def sendToken():
 
 @app.route('/camera')
 def camera():
-    # global vid
-    # r, image = vid.read()
-    print(f'{os.getcwd()}\\camera.jpg')
-    cv2.imshow('camera', server.frame2)
-    cv2.imwrite(f'{os.getcwd()}\\camera.jpg', server.frame2)
-    return send_file('./src/camera.jpg')
+    cv2.imwrite(f'{script_path}\\src\\camera.jpg', server.frame2)
+    return send_file(f'{script_path}\\src\\camera.jpg')
 
 
 if __name__ == '__main__':
