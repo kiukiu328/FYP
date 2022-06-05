@@ -426,15 +426,11 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
             var jObjVacancy = JSONArray()
 //            load data from server
             try {
-                (URL("https://${MainActivity.SERVER_PATH}/python/main.py?type=echarge_en").openConnection() as HttpsURLConnection).apply {
-                    sslSocketFactory = createSocketFactory(listOf("TLSv1.2"))
-                    hostnameVerifier = HostnameVerifier { _, _ -> true }
+                (URL("http://${MainActivity.SERVER_PATH}:8080/vacancy?type=echarge_en").openConnection()).apply {
                     readTimeout = 50_000
                 }.inputStream.use {
                     jObjChargeStation = JSONArray(it.bufferedReader().use(BufferedReader::readText))
-                    (URL("https://${MainActivity.SERVER_PATH}/python/main.py?type=vacancy").openConnection() as HttpsURLConnection).apply {
-                        sslSocketFactory = createSocketFactory(listOf("TLSv1.2"))
-                        hostnameVerifier = HostnameVerifier { _, _ -> true }
+                    (URL("http://${MainActivity.SERVER_PATH}:8080/vacancy?type=vacancy").openConnection()).apply {
                         readTimeout = 50_000
                     }.inputStream.use {
                         jObjVacancy = JSONArray(it.bufferedReader().use(BufferedReader::readText))

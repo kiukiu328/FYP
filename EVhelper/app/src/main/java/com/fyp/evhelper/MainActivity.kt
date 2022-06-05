@@ -1,6 +1,5 @@
 package com.fyp.evhelper
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -24,7 +23,6 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
-import java.util.*
 
 // for other program to go back homepage
 lateinit var animatedBottomBar: AnimatedBottomBar

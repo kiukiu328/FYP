@@ -490,6 +490,32 @@ def camera():
     return send_file(f'{script_path}\\src\\camera.jpg')
 
 
+import requests as requests
+
+
+@app.route('/vacancy')
+def vacancy():
+    print('vacancy')
+    type = request.args['type']
+    if type == 'vacancy':
+        url = "https://api.data.gov.hk/v1/carpark-info-vacancy"
+        info = requests.get(url).json()['results']
+        url = "https://api.data.gov.hk/v1/carpark-info-vacancy?data=vacancy"
+        vacancy = requests.get(url).json()['results']
+
+        for x in range(len(info)):
+            vacancy[x].update(info[x])
+        with open('vacancy.json', 'w') as f:
+            json.dump(vacancy, f)
+        return send_file(f'{script_path}\\src\\vacancy.json')
+
+    elif type == 'echarge_en':
+        return send_file(f'{script_path}\\src\\echarge_en.json')
+
+    else:
+        return 'wrong type'
+
+
 if __name__ == '__main__':
     init_WLAN_address()
     td2 = threading.Thread(target=start_server)
