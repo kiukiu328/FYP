@@ -269,7 +269,7 @@ def print_frame():
                 else:
                     detectedImage = cv2.putText(detectedImage, f"Detected time:{num}", (int(5), int(55)),
                                                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
-                # cv2.imshow('face-detection-demo2', detectedImage)
+                cv2.imshow('face-detection-demo2', detectedImage)
                 cv2.waitKey(1)
 
 

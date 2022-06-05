@@ -1,5 +1,7 @@
 import os
 import SendPostRequest
+from os.path import dirname, abspath
+os.chdir(abspath(dirname(__file__)))
 os.chdir('src')
 MODEL_NAME = 'my_model'
 DATA_DIR = os.path.join(os.getcwd(), 'data')
