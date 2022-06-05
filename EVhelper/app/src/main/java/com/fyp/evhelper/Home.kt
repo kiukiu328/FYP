@@ -167,7 +167,8 @@ class Home : Fragment() {
 //                when the view is running load the data
                 while (!viewDestroy) {
                     try {
-                        apiResponse = URL("http://192.168.1.107/").readText()
+//                        apiResponse = URL("http://192.168.1.107/").readText()
+                        apiResponse = "{\"temperature\":25.6,\"pressure\":1014.04,\"humidity\":92.00,\"voltage\":2.42}"
                         jObj = JSONObject(apiResponse)
                         (context as Activity).runOnUiThread {
                             tempValue.textSize = textSize
@@ -205,7 +206,7 @@ class Home : Fragment() {
                 while (!viewDestroy) {
                     if (liveCaptureOn) {
                         try {
-                            imageStream = URL("http://192.168.1.148:5000/camera").openStream()
+                            imageStream = URL("http://${MainActivity.SERVER_PATH}:8080/camera").openStream()
                             image = BitmapFactory.decodeStream(imageStream)
 
                             (context as Activity).runOnUiThread {

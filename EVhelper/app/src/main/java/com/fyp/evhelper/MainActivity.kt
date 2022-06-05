@@ -1,11 +1,9 @@
 package com.fyp.evhelper
 
-import android.content.Context
-import android.content.res.Configuration
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
-import android.view.ContextThemeWrapper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import com.fyp.evhelper.reminder.ReminderMainPage
 import com.fyp.evhelper.stream.*
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.*
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     //    set the companion object for other program to get the public
     companion object {
         var androidID: String = ""
-        val SERVER_PATH = "192.168.1.171"
+        var SERVER_PATH = ""
         fun homePage() {
             animatedBottomBar.selectTabAt(2)
         }
@@ -58,6 +57,7 @@ class MainActivity : AppCompatActivity() {
             Settings.Secure.ANDROID_ID
         )
 
+        init_server_address()
         println("androidID:" + androidID)
         var token = ""
 //        Firebase for getting messaging
@@ -125,6 +125,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun init_server_address() {
+        val database = FirebaseDatabase.getInstance()
+        val ref = database.reference.child("ip_address")
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                SERVER_PATH = dataSnapshot.value.toString()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                println("The read failed: " + databaseError.code)
+            }
+        })
+
     }
 
     // send Token to server for notification

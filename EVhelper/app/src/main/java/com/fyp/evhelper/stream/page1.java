@@ -225,7 +225,6 @@ public class page1 extends Fragment {
                         if (frame == null) {
                             continue;
                         }
-                        Log.d(null, "flag3");
 
                         String[] data = frame.split(",");
                         if (Integer.valueOf(data[0]) == data[1].length()) {

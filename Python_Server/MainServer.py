@@ -2,66 +2,77 @@ import Detect_Police
 import StreamReceiver
 import threading
 from face_detect2 import FaceDetect
-from flask import Flask,render_template,send_file,Response,request
-import json,re
+from flask import Flask, render_template, send_file, Response, request
+import json, re
 from datetime import datetime
 import socket
 import cv2
 import base64
 from threading import Timer
 import AlertMessaging
-from FirebaseDB import UpdateAddress,InitFirebase
-from MySQLDatabase import UploadVideoRecord,GetAlertRecord,UpdateAlertRecord
+from FirebaseDB import UpdateAddress, InitFirebase
+from MySQLDatabase import UploadVideoRecord, GetAlertRecord, UpdateAlertRecord
 import GetNetworkAddress
-import os,sys
+import os, sys
 from pathlib import Path
 import subprocess
-#Server Communication
+
+import cv2
+from flask import Flask, request, send_file
+import mysql.connector
+import geopy.distance
+# import AlertPolice
+import GetNetworkAddress
+from os.path import dirname, abspath
+
+script_path = abspath(dirname(__file__))
+
+# Server Communication
 server = None
 face_detect_module = FaceDetect
 
-
-#图片数据传输
+# 图片数据传输
 HOST = ''
 # PORT = 9990
 # ADDRESS = (HOST, PORT)
-ADDRESS=""
+ADDRESS = ""
 
 # 创建一个套接字
 # tcpServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-tcpServer =""
+tcpServer = ""
 # 绑定本地ip
 # tcpServer.bind(ADDRESS)
 
 
 stream_img = ""
-#每10秒刷一次
-timing_picture=""
+# 每10秒刷一次
+timing_picture = ""
 
-#alert funciton的参数
+# alert funciton的参数
 alert_messaging_model = AlertMessaging
-alert_signal= True
-num =0
+alert_signal = True
+num = 0
 
-#检测后的 图片
+# 检测后的 图片
 detectedImage = ""
 showDetectedImage = True
 
-#写入视屏
+# 写入视屏
 flag_write_video = True
-#是否正在录像
-#true:在录像 false:没在录像
+# 是否正在录像
+# true:在录像 false:没在录像
 recording_state = False
 
-#計算識別指定object 幾秒發送alert
+# 計算識別指定object 幾秒發送alert
 alert_timer = 10
 
-#圖片更換的時間
-changePictureTime=5
+# 圖片更換的時間
+changePictureTime = 5
 
-#把视频写成文件
+
+# 把视频写成文件
 def write_video(out):
-    global flag_write_video,server
+    global flag_write_video, server
     while 1:
         out.write(server.frame2)
         cv2.waitKey(1)
@@ -70,55 +81,63 @@ def write_video(out):
 
 
 def video_write_init(video_name):
-    global flag_write_video,server
-    flag_write_video=True
+    global flag_write_video, server
+    flag_write_video = True
 
     fps = 40.0  # 指定写入帧率为20
 
     codec = cv2.VideoWriter_fourcc('H', '2', '6', '4')
     # day-hour-min-second
 
-    video_Buffer=sys.path[0]+f"\\BufferVideo\\{video_name}.avi"
-    target_path = sys.path[0]+f'\\UserSourceFile\\video\\{video_name}.mp4'
+    # video_Buffer = sys.path[0] + f"\\BufferVideo\\{video_name}.avi"
+    # target_path = sys.path[0] + f'\\UserSourceFile\\video\\{video_name}.mp4'
+
+    video_Buffer = f"{script_path}\\src\\BufferVideo\\{video_name}.avi"
+    target_path = f'{script_path}\\src\\UserSourceFile\\video\\{video_name}.mp4'
 
     print(video_Buffer)
 
-    out = cv2.VideoWriter(video_Buffer, codec, fps,(server.frame2.shape[1], server.frame2.shape[0]))
-    #写入frame
+    out = cv2.VideoWriter(video_Buffer, codec, fps, (server.frame2.shape[1], server.frame2.shape[0]))
+    # 写入frame
     write_video(out)
     print("stop recording")
     # UploadVideoRecord.save_video(video_path)
 
-    zipVideo(video_name,video_Buffer,target_path)
+    zipVideo(video_name, video_Buffer, target_path)
     out.release()
 
 
-
 # 轉換成 可播放格式
-def zipVideo(file_name,file,target):
+def zipVideo(file_name, file, target):
     # dir = file.strip(".avi")
     # command = "ffmpeg -i %s.avi %s.mp4" % (dir, target)
     # call(command.split())
-    return_msg = subprocess.call('ffmpeg -i ' + file.replace(" ", "\\ ") + " -c:v libx264 -preset medium -qp 35 " + target.replace(" ", "\\ "),shell=True)
-    if return_msg==0:
+    print(f'{script_path}\\src\\ffmpeg\\bin\\ffmpeg.exe')
+    return_msg = subprocess.call(
+        f'{script_path}\\src\\ffmpeg\\bin\\ffmpeg.exe -i ' + file.replace(" ",
+                                                                          "\\ ") + " -c:v libx264 -preset medium -qp 35 " + target.replace(
+            " ", "\\ "),
+        shell=True)
+    if return_msg == 0:
         UpdateAlertRecord.updateVideoState(file_name, 1)
+
 
 # 截图
 def videoPhotoCapture(icon_name):
     global server
     # icon_name = f"{date_obj.month}_{date_obj.day}_{date_obj.hour}_{date_obj.minute}_{date_obj.second}"
-    icon_path = f'UserSourceFile\\icon\\{icon_name}.jpg'
+    icon_path = f'{script_path}\\srcUserSourceFile\\icon\\{icon_name}.jpg'
     cv2.imwrite(icon_path, server.frame2)
 
 
-
-#因为 我选择的是延迟5秒关闭视屏
+# 因为 我选择的是延迟5秒关闭视屏
 def close_recording():
     global flag_write_video
     # 停止录像
     flag_write_video = False
 
-#时间为基准的 file 名字
+
+# 时间为基准的 file 名字
 def generateFileName():
     date_obj = datetime.now()
     video_name = f"{date_obj.month}_{date_obj.day}_{date_obj.hour}_{date_obj.minute}_{date_obj.second}"
@@ -126,7 +145,7 @@ def generateFileName():
 
 
 def alert():
-    global num,face_detect_module,alert_signal,alert_messaging_model,flag_write_video,recording_state,alert_timer
+    global num, face_detect_module, alert_signal, alert_messaging_model, flag_write_video, recording_state, alert_timer
     count = face_detect_module.count
 
     # print("Detected time is:",num,"Count is:",count)
@@ -135,13 +154,13 @@ def alert():
         num = 0
         alert_signal = True
 
-        if(recording_state == True):
-            #停止录像
+        if (recording_state == True):
+            # 停止录像
             Timer(3, close_recording).start()
             recording_state = False
 
     elif count > 0:
-        num+=1
+        num += 1
 
     if (num == alert_timer and alert_signal == True):
         alert_signal = False
@@ -149,28 +168,27 @@ def alert():
         print("Start recording")
         # 开启录像 和 截图
         recording_state = True
-        #生成文件名
+        # 生成文件名
         fileName_new = generateFileName()
 
-        iconRecord = threading.Thread(target=videoPhotoCapture,args=(fileName_new,))
+        iconRecord = threading.Thread(target=videoPhotoCapture, args=(fileName_new,))
         iconRecord.start()
-        videoRecord = threading.Thread(target=video_write_init,args=(fileName_new,))
+        videoRecord = threading.Thread(target=video_write_init, args=(fileName_new,))
         videoRecord.start()
 
         UploadVideoRecord.save_video(fileName_new)
-        #把 记录 储存到数据库
+        # 把 记录 储存到数据库
 
         print("Alert now")
         AlertMessaging.messaging_send("Security reminder", "Someone is looking at your car for a long time")
-
 
     timer = threading.Timer(1, alert)
     timer.start()
 
 
-#图片数据传输
+# 图片数据传输
 def convert_frame(frame):
-    if(len(frame) != 0):
+    if (len(frame) != 0):
         img_encode = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 80])[1]
         frame = base64.b64encode(img_encode)
         # frame = base64.b64encode(frame)
@@ -180,19 +198,18 @@ def convert_frame(frame):
         return "".encode()
 
 
-
 def pictuer_timing():
-    global timing_picture,server
+    global timing_picture, server
 
-    if(server is not None and len(server.frame2)!=0):
+    if (server is not None and len(server.frame2) != 0):
         timing_picture = server.frame2
         # print(len(timing_picture))
     Timer(1, pictuer_timing).start()
 
 
-#视屏直播
+# 视屏直播
 def start_stream_server():
-    global stream_img,tcpServer,server,showDetectedImage,detectedImage,timing_picture
+    global stream_img, tcpServer, server, showDetectedImage, detectedImage, timing_picture
     # 开始监听
     tcpServer.listen(5)
     print(ADDRESS)
@@ -205,13 +222,13 @@ def start_stream_server():
             try:
                 while 1:
                     # 读取图像
-                    #通过 flag 控制 图像 返回什么样的类型
-                    #True:返回显示框框的图像
-                    #False: 返回原图片
+                    # 通过 flag 控制 图像 返回什么样的类型
+                    # True:返回显示框框的图像
+                    # False: 返回原图片
                     if showDetectedImage:
-                        cv_image=detectedImage
+                        cv_image = detectedImage
                     else:
-                        cv_image= server.frame2
+                        cv_image = server.frame2
                     # # 压缩图像
                     # img_encode = cv2.imencode('.jpg', cv_image, [cv2.IMWRITE_JPEG_QUALITY, 80])[1]
 
@@ -229,12 +246,14 @@ def start_stream_server():
             finally:
                 client_socket.close()
                 # print("test")
-#图篇数据传输 end
 
 
-#人脸检测
+# 图篇数据传输 end
+
+
+# 人脸检测
 def print_frame():
-    global server,face_detect_module,detectedImage
+    global server, face_detect_module, detectedImage
     alert()
     while 1:
         if (server is not None and len(server.frame2) != 0):
@@ -250,15 +269,15 @@ def print_frame():
                 else:
                     detectedImage = cv2.putText(detectedImage, f"Detected time:{num}", (int(5), int(55)),
                                                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
-                cv2.imshow('face-detection-demo2', detectedImage)
+                # cv2.imshow('face-detection-demo2', detectedImage)
                 cv2.waitKey(1)
 
 
-#启动服务器
+# 启动服务器
 def start_server():
     global server
 
-    #启动检测
+    # 启动检测
     td1 = threading.Thread(target=print_frame)
     td1.start()
     td3 = threading.Thread(target=pictuer_timing)
@@ -268,37 +287,36 @@ def start_server():
     td5 = threading.Thread(target=clearBufferVideo)
     td5.start()
 
-
-    #最后开启服务器
+    # 最后开启服务器
     if server is None:
         server = StreamReceiver
         server.start()
 
 
-#刪除所有原 視頻文件
-#不能亂動
+# 刪除所有原 視頻文件
+# 不能亂動
 def clearBufferVideo():
-    root_dir = sys.path[0]+"\\BufferVideo"
+    root_dir = sys.path[0] + "\\BufferVideo"
     for subdirs, dirs, files in os.walk(root_dir):
         for file in files:
-            os.remove(subdirs+"\\"+file)
+            os.remove(subdirs + "\\" + file)
             # print(subdirs+"\\"+file)
     print("remove buffer video file")
 
-    #一小時自己清除
-    clear = Timer(60*60, clearBufferVideo)
+    # 一小時自己清除
+    clear = Timer(60 * 60, clearBufferVideo)
     clear.start()
 
-#初始化 WLAN address
+
+# 初始化 WLAN address
 def init_WLAN_address():
-    global tcpServer,ADDRESS,HOST
+    global tcpServer, ADDRESS, HOST
     InitFirebase.init()
-    HOST=GetNetworkAddress.get_WLAN_address()
+    HOST = GetNetworkAddress.get_WLAN_address()
 
-    #save the host data to firebase
+    # save the host data to firebase
     UpdateAddress.save_network_info(HOST)
-    PORT=9990
-
+    PORT = 9990
 
     ADDRESS = (HOST, PORT)
     tcpServer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -306,26 +324,30 @@ def init_WLAN_address():
 
 
 app = Flask(__name__)
+
+
 @app.route('/')  # 主页
 def index():
-    global  alert_signal
+    global alert_signal
 
     time = datetime.now()
-    string_time  = time.strftime('%Y-%m-%d %H:%M:%S')
-    data = {"detect_result":alert_signal,"time":string_time}
+    string_time = time.strftime('%Y-%m-%d %H:%M:%S')
+    data = {"detect_result": alert_signal, "time": string_time}
     json_string = json.dumps(data)
     return json_string
+
 
 @app.route("/image/<imageName>")
 def getImage(imageName):
     image = r"UserSourceFile\icon\{}.jpg".format(imageName)
-    #resp = Response(image,mimetype="image/jpeg")
-    return send_file(image,mimetype="image/jpeg")
-
+    # resp = Response(image,mimetype="image/jpeg")
+    return send_file(image, mimetype="image/jpeg")
 
 
 CHUNK_SIZE = 10 ** 25
 BASE_DIR = Path('.')
+
+
 @app.after_request
 def after_request(response):
     response.headers.add('Accept-Ranges', 'bytes')
@@ -353,6 +375,7 @@ def get_chunk(full_path, byte1=None, byte2=None):
         chunk = f.read(length)
     return chunk, start, length, file_size
 
+
 def get_byte_interval(request):
     range_header = request.headers.get('Range', None)
     byte1, byte2 = 0, None
@@ -367,6 +390,7 @@ def get_byte_interval(request):
 
     return byte1, byte2
 
+
 @app.route("/video/<videoName>")
 def getVideo(videoName):
     video = r"UserSourceFile/video/{}.mp4".format(videoName)
@@ -375,7 +399,6 @@ def getVideo(videoName):
     chunk, start, length, file_size = get_chunk(
         BASE_DIR / video,
         byte1, byte2)
-
 
     resp = Response(chunk, 206, mimetype='video/mp4',
                     content_type='video/mp4', direct_passthrough=True)
@@ -386,33 +409,89 @@ def getVideo(videoName):
     return resp
 
 
-
 @app.route("/AlertRecordJSON")
 def getAlertJSON():
     return GetAlertRecord.getDataJson()
 
 
-@app.route("/setParameters",methods=["GET","POST"])
+@app.route("/setParameters", methods=["GET", "POST"])
 def setD():
-    global alert_timer,changePictureTime
+    global alert_timer, changePictureTime
     detectTime = request.args.get("detectTime")
 
     prePictureTime = request.args.get("previewPictureTime")
     if detectTime != None:
         alert_timer = int(detectTime)
 
-    if prePictureTime!= None:
-        changePictureTime= int(prePictureTime)
+    if prePictureTime != None:
+        changePictureTime = int(prePictureTime)
 
     return "successful change"
 
 
 @app.route("/getParameters")
 def getD():
-    global alert_timer,changePictureTime
-    json_result = {"DetectTime":str(alert_timer),"PreviewPictureTime":str(changePictureTime)}
-    result =json.dumps(json_result)
+    global alert_timer, changePictureTime
+    json_result = {"DetectTime": str(alert_timer), "PreviewPictureTime": str(changePictureTime)}
+    result = json.dumps(json_result)
     return result
+
+
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="fyp_project"
+)
+
+cursor = mydb.cursor()
+
+
+@app.route('/location', methods=['POST'])
+def location():
+    data = request.form
+    id = data['id']
+    latitude = data['latitude']
+    longitude = data['longitude']
+    try:
+        sql = f'INSERT INTO location VALUES ("{id}", {latitude}, {longitude})'
+        cursor.execute(sql)
+        mydb.commit()
+        print(cursor.rowcount, "record inserted.")
+    except:
+        sql = f'UPDATE location SET latitude={latitude}, longitude={longitude} WHERE id="{id}"'
+        cursor.execute(sql)
+        mydb.commit()
+        print(cursor.rowcount, "record UPDATE.")
+
+    return 'yes'
+
+
+countingFiveMin = False
+timeMarker = None
+from datetime import datetime, timedelta
+
+
+@app.route('/sendToken', methods=['POST'])
+def sendToken():
+    data = request.form
+    id = data['id']
+    token = data['token']
+    sql = f'UPDATE location SET token="{token}" WHERE id="{id}"'
+    cursor.execute(sql)
+    mydb.commit()
+    print(cursor.rowcount, "record UPDATE.")
+    return f'id: {id}  || token: {token}'
+
+
+@app.route('/camera')
+def camera():
+    # global vid
+    # r, image = vid.read()
+    print(f'{os.getcwd()}\\camera.jpg')
+    cv2.imshow('camera', server.frame2)
+    cv2.imwrite(f'{os.getcwd()}\\camera.jpg', server.frame2)
+    return send_file('./src/camera.jpg')
 
 
 if __name__ == '__main__':
@@ -420,8 +499,3 @@ if __name__ == '__main__':
     td2 = threading.Thread(target=start_server)
     td2.start()
     app.run(host=HOST, port=8080)
-
-
-
-
-
